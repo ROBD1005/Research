@@ -1,0 +1,85 @@
+---
+title: "Boxplot"
+author: "Robert Dellinger"
+date: "5/12/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(tidymodels)
+library(here)
+library(lubridate)
+
+```
+
+## Temperature_Data 
+
+```{r, plot.height="8", fig.width="2"}
+
+
+csv_files <- list.files("/Users/robertdellinger/Documents/Research/Experiment_Data/Temperature_Data_Prelim", pattern = ".csv", full.names = TRUE) # edit "my_directory"
+
+
+temp.data <- 
+  map_dfr(
+    csv_files, 
+    read_csv,
+    col_names = c("n", "datetime", "temp", "light", "null1", "null2", "null3", "null4"),
+    .id = "file_name") %>% 
+  mutate(Tank=file_name)
+
+temp.clean <- temp.data [-1,] %>% 
+  mutate(datetime= as.Date(parse_date_time(datetime, c('%m/%d/%Y %H:%M:%S')))) %>% 
+  filter(datetime >= "2022-04-01",
+         datetime <= "2022-04-07") %>% 
+  mutate_if(is.character,as.numeric) %>% 
+  dplyr::select(Tank, temp) 
+
+summary.temp <- temp.clean %>% 
+  group_by(Tank) %>% 
+  summarise(mean.temp=mean(temp, na.rm=TRUE),
+            min.temp=min(temp, na.rm=TRUE),
+            sd.temp=sd(temp, na.rm=TRUE),
+            max.temp=max(temp, na.rm=TRUE)) %>% 
+            arrange(mean.temp) 
+
+col <- c("1", "1", "1", "1", "1", "1")
+tank_numbers <- c("12","16","18","22","24","28")
+
+summary.temp <- summary.temp[-c(2, 5, 8, 9), ] %>% 
+  mutate(Tank = tank_numbers,
+         col=col)
+```
+
+
+```{r, plot.height="8", fig.width="2"}
+
+
+
+temp.point<- ggplot(summary.temp, aes(y=col, x=mean.temp, xmin=min.temp, xmax=max.temp))+
+  geom_crossbar(aes(fill=Tank, xmin = min.temp, xmax = max.temp), size=0.1, width=0.1)+
+  scale_color_discrete(name="Set Temperature (°C)")+
+  theme_minimal()+
+  theme(text=element_text(family="Helvetica", size = 7, color = 'black'),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        plot.title = element_text(hjust = 0.25, size = 10),
+        legend.title = element_text(size=5))+
+  scale_y_continuous(breaks = c(12,16,20,24,28))+
+  scale_y_discrete()+
+  labs(title="Mesocosm Temperature Range")+
+  xlab("Temperature (°C) Variability in a Week")
+
+temp.point
+
+ggsave(plot = temp.point, width = 4, height = 2, dpi = 300, filename = "temp.point.png")
+
+
+```
+
+
+

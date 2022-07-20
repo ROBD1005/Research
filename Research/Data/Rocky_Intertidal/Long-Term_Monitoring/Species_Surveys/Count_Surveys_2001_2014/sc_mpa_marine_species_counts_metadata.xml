@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<dataTable id="" scope="document">
+	<physical scope="document">
+		<objectName>sc_mpa_MARINe_species_counts</objectName>
+	</physical>
+	<attributeList>
+		<attribute id="" scope="document">
+			<attributeName>SC_project_short_code</attributeName>
+			<attributeLabel>SC project short code</attributeLabel>
+			<attributeDefinition>The unique code for each baseline program project funded through the SC MPA Baseline Program. This code refers to a specific entry on the SC_MPA_BaselineProgramInformation_LookupTable. </attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any text</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>SiteID</attributeName>
+			<attributeLabel>Long-Term Monitoring site code</attributeLabel>
+			<attributeDefinition>The unique letter code that indicates where the plot is located. This ID refers to a specific entry in the site table.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>any text</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>SampleSeason</attributeName>
+			<attributeLabel>Sample Season</attributeLabel>
+			<attributeDefinition>Consecutive sampling number. A code created to allow sequencing of the seasons, used for sorting data in chronological order.</attributeDefinition>
+			<measurementScale>
+				<ordinal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any integer from 1 to N</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</ordinal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>SamplingSeasonCode</attributeName>
+			<attributeLabel>Sampling season code</attributeLabel>
+			<attributeDefinition>A four-character code to identify the Sampling season. The first two characters indicate the season and the last 2 characters indicate the year</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Two character season, eg. FA for Fall, followed by two digit year, eg. 10 for 2010</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>Year</attributeName>
+			<attributeLabel>Sample season year</attributeLabel>
+			<attributeDefinition>The four digit calendar year for this sample season. The sample season is designated by the survey team, and may not indicate the actual survey year. For example, surveys conducted in January, 2008 may have a sample season year of 2007. This year is expressed in YYYY format. Dates reflect measurements taken in local time. Local time is Pacific Standard Time except during months when Pacific Daylight Time is effective.</attributeDefinition>
+			<measurementScale>
+				<datetime>
+					<formatString>YYYY</formatString>
+					<dateTimePrecision>1 year</dateTimePrecision>
+				</datetime>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>SeasonSeq</attributeName>
+			<attributeLabel>Season sequence</attributeLabel>
+			<attributeDefinition>The Season sequence within each year. Each number indicates a different season.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<enumeratedDomain enforced="yes">
+							<codeDefinition>
+								<code>1</code>
+								<definition>Survey conducted in the Spring, generally between February and May</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code>2</code>
+								<definition>Survey conducted in the Summer, generally between June and September</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code>3</code>
+								<definition>Survey conducted in the Fall, generally between October and January</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code>4</code>
+								<definition>Survey conducted in the Winter, generally between December and January. This season is not always used. If it is used, it will overlap Fall and Spring.</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code></code>
+								<definition></definition>
+							</codeDefinition>
+						</enumeratedDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>TargetSpecies</attributeName>
+			<attributeLabel>TargetSpecies</attributeLabel>
+			<attributeDefinition>The specific organism that this plot was created to monitor.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Name of the organism as identified on the Integrated Taxonomic Information System (ITIS, http://www.itis.usda.gov). In cases where substrate or other non taxonomic name is used, classification determined by the survey team.</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>PlotID</attributeName>
+			<attributeLabel>Plot Number</attributeLabel>
+			<attributeDefinition>Replicate plot number, starting from 1.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any integer from 1 to N</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>SixLetterCode</attributeName>
+			<attributeLabel>Long Term Monitoring Survey Species Code</attributeLabel>
+			<attributeDefinition>The unique code that indicates the organism or characteristic being identified. This code refers to a specific entry on the classification table.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Name of the organism as identified on the Integrated Taxonomic Information System (ITIS, http://www.itis.usda.gov). In cases where substrate or other non taxonomic name is used, classification determined by the survey team.</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>SpeciesCount</attributeName>
+			<attributeLabel>Species Count</attributeLabel>
+			<attributeDefinition>The total count per plot of the organism being counted.</attributeDefinition>
+			<measurementScale>
+				<ratio>
+					<unit>
+						<standardUnit>dimensionless</standardUnit>
+					</unit>
+					<precision>.5</precision>
+					<numericDomain>
+						<numberType></numberType>
+					</numericDomain>
+				</ratio>
+			</measurementScale>
+	</attributeList>
+</dataTable>

@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<dataTable id="" scope="document">
+	<physical scope="document">
+		<objectName>sc_mpa_cbs_point_contact</objectName>
+	</physical>
+	<attributeList>
+		<attribute id="" scope="document">
+			<attributeName>SC_project_short_code</attributeName>
+			<attributeLabel>SC project short code</attributeLabel>
+			<attributeDefinition>The unique code for each baseline program project funded through the SC MPA Baseline Program. This code refers to a specific entry on the SC_MPA_BaselineProgramInformation_LookupTable. </attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any text</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>cbsSiteCode</attributeName>
+			<attributeLabel>Biodiversity Site Code</attributeLabel>
+			<attributeDefinition>Unique site code that indicates where the Biodiversity survey was done. this site code refers to a specific entry on the site table.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any integer 1 to n</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>survey_rep</attributeName>
+			<attributeLabel>survey repetition</attributeLabel>
+			<attributeDefinition>A number representing the succession of surveys conducted at a site. A number '1' represents the first time a site was sampled, a '2' represents the second time it was sampled, and so on. True date of sampling is defined in the observation table for each method.</attributeDefinition>
+			<measurementScale>
+				<interval>
+					<unit>
+						<standardUnit>dimensionless</standardUnit>
+					</unit>
+					<precision>1</precision>
+					<numericDomain>
+						<numberType></numberType>
+					</numericDomain>
+				</interval>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>year</attributeName>
+			<attributeLabel>year</attributeLabel>
+			<attributeDefinition>The year that the survey was done. This year is expressed in YYYY format. Dates reflect measurements taken in local time. For sites in Alaska, local time is Alaska Standard Time except during months when Alaska Daylight time is effective. For all other Pacific Coast sites, local time is Pacific Standard Time except during months when Pacific Daylight Time is effective.</attributeDefinition>
+			<measurementScale>
+				<datetime>
+					<formatString>YYYY</formatString>
+					<dateTimePrecision>1 Year</dateTimePrecision>
+				</datetime>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>section</attributeName>
+			<attributeLabel>section</attributeLabel>
+			<attributeDefinition>A number describing a site as a contiguous or divided survey area. Divisions are referred to as sections. A site will be divided when there is not enough space on the intertidal bench for a 30-meter wide baseline. Therefore, the 2 sections together will make up the survey area for the site. </attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<enumeratedDomain enforced="yes">
+							<codeDefinition>
+								<code>1</code>
+								<definition>Right hand (upcoast) side when facing the ocean from the land. This is the only value for sites with a single section, indicating no division at the site</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code>2</code>
+								<definition>Left hand (downcoast) side when facing the ocean from the land</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code></code>
+								<definition></definition>
+							</codeDefinition>
+						</enumeratedDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>transect</attributeName>
+			<attributeLabel>transect</attributeLabel>
+			<attributeDefinition>A number representing one of the parallel meter tapes (transects) within the survey area. Transects stem from a baseline, which is established along shore in the high zone of a site area. The transect number is determined by the meter mark on the baseline from where the transect begins.</attributeDefinition>
+			<measurementScale>
+				<interval>
+					<unit>
+						<standardUnit>meter</standardUnit>
+					</unit>
+					<precision>0.1</precision>
+					<numericDomain>
+						<numberType></numberType>
+					</numericDomain>
+				</interval>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>location</attributeName>
+			<attributeLabel>location</attributeLabel>
+			<attributeDefinition>The location along the transect at which the classification code variable was observed.</attributeDefinition>
+			<measurementScale>
+				<interval>
+					<unit>
+						<standardUnit>meter</standardUnit>
+					</unit>
+					<precision>0.05</precision>
+					<numericDomain>
+						<numberType></numberType>
+					</numericDomain>
+				</interval>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>class_code</attributeName>
+			<attributeLabel>classification code</attributeLabel>
+			<attributeDefinition>The unique classification code that indicates the organism or characteristic being identified. This code refers to a specific entry in the class table.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any integer 1 to N</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>point</attributeName>
+			<attributeLabel>point</attributeLabel>
+			<attributeDefinition>A number that represents the spatial position of the classification code variable relative to the location on the transect.</attributeDefinition>
+			<measurementScale>
+				<ordinal>
+					<nonNumericDomain>
+						<enumeratedDomain enforced="yes">
+							<codeDefinition>
+								<code>1</code>
+								<definition>The organism or characteristic found directly at the location. Additional points with this designation may occur on the same transect and location, if vertical stratification such as layering or epi/host relationships) occurs</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code>2</code>
+								<definition>The next nearest organism or characteristic to that/those recorded at point 1, within a search radius defined as half the distance between point 1 and the next sequential location along the transect.</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code>3</code>
+								<definition>The next nearest organism or characteristic to that/those recorded at point 2, within a search radius defined as half the distance between point 1 and the next sequential location along the transect.</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code></code>
+								<definition></definition>
+							</codeDefinition>
+						</enumeratedDomain>
+					</nonNumericDomain>
+				</ordinal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>method_code</attributeName>
+			<attributeLabel>method code</attributeLabel>
+			<attributeDefinition>Unique numeric lookup code used to designate between the different methods of sampling the site. This code refers to a specific entry on the method table.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any integer 1 to n</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+	</attributeList>
+</dataTable>

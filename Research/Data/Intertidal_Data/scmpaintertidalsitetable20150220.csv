@@ -1,0 +1,64 @@
+SC_project_short_code,intertidal_sitename,SiteOrder,intertidal_Latitude,intertidal_Longitude,SiteID,cbs_site_code,MPA_name,MPA_designation,NMS_name,ASBS_name
+SC_Rocky_It,Cabrillo I,6860,32.669434,-117.24541,CAB1,50,Cabrillo State Marine Reserve,SMR,,
+SC_Rocky_It,Cabrillo III,6900,32.6648985,-117.24282,CAB3,51,Cabrillo State Marine Reserve,SMR,,
+SC_Rocky_It,Scripps Reef,6780,32.8713952,-117.25321,SCRE,49,San Diego-Scripps Coastal State Marine Conservation Area,SMCA,,San Diego Marine Life Refuge ASBS
+SC_Rocky_It,Abalone Cove,6595,33.7377766,-118.37612,ABCV,89,Abalone Cove State Marine Conservation Area,SMCA,,
+SC_Rocky_It,Alegria,6420,34.467137,-120.27818,ALEG,38,,,,
+SC_Rocky_It,Arroyo Hondo,6440,34.4733077,-120.14539,ARHO,37,,,,
+SC_Rocky_It,Avalon Quarry,7640,33.3219998,-118.3052,CTAV,605,,,,"Santa Catalina Island - Subarea Four, Binnacle Rock to Jewfish Point ASBS"
+SC_Rocky_It,Big Fisherman Cove,7620,33.4464473,-118.48526,CTBF,604,Blue Cavern (Catalina Island) Offshore State Marine Conservation Area,SMCA,,"Santa Catalina Island - Subarea One, Isthmus Cove to Catalina Head ASBS"
+SC_Rocky_It,Bird Rock,7610,33.451665,-118.48761,CTBR,600,Blue Cavern (Catalina Island) Offshore State Marine Conservation Area,SMCA,,"Santa Catalina Island - Subarea One, Isthmus Cove to Catalina Head ASBS"
+SC_Rocky_It,Boy Scout Camp,7710,33.0011201,-118.54832,CLBS,800,,,,San Clemente Island ASBS
+SC_Rocky_It,Buck Gully South,6640,33.588246,-117.86736,BUC,73,Crystal Cove State Marine Conservation Area,SMCA,,
+SC_Rocky_It,Cardiff Reef,6760,32.99984,-117.27867,CARE,90,,,,
+SC_Rocky_It,Carpinteria,6480,34.3870373,-119.51408,CARP,40,,,,
+SC_Rocky_It,Cat Rock,7300,34.0055986,-119.41941,ANCR,400,,,Channel Islands NMS,Santa Barbara Island and Anacapa Island ASBS
+SC_Rocky_It,Coal Oil Point,6460,34.4068596,-119.87829,COPT,39,Campus Point State Marine Conservation Area,SMCA (No-Take),,
+SC_Rocky_It,Crook Point,7030,34.0220666,-120.37924,SMCP,100,,,Channel Islands NMS,"San Miguel, Santa Rosa, and Santa Cruz Islands ASBS"
+SC_Rocky_It,Crystal Cove,6660,33.5708642,-117.83785,CRCO,46,Crystal Cove State Marine Conservation Area,SMCA,,Irvine Coast Marine Life Refuge ASBS
+SC_Rocky_It,Cuyler Harbor,7020,34.0486124,-120.33642,SMCH,101,Harris Point (San Miguel Island) State Marine Reserve,SMR,Channel Islands NMS,"San Miguel, Santa Rosa, and Santa Cruz Islands ASBS"
+SC_Rocky_It,Dana Point,6740,33.459941,-117.71461,DAPT,48,Dana Point State Marine Conservation Area,SMCA,,
+SC_Rocky_It,Deer Creek,6525,34.0606852,-118.98221,DEE,97,,,,Mugu Lagoon to Latigo Point ASBS
+SC_Rocky_It,East Point,7120,33.9427004,-119.96793,SREP,204,,,Channel Islands NMS,"San Miguel, Santa Rosa, and Santa Cruz Islands ASBS"
+SC_Rocky_It,Eel Point,7720,32.9180073,-118.54668,CLEP,801,,,,San Clemente Island ASBS
+SC_Rocky_It,Ellwood,6450,34.4351939,-119.93078,ELWD,87,,,,
+SC_Rocky_It,Ford Point,7130,33.9145696,-120.0506,SRFP,203,,,Channel Islands NMS,"San Miguel, Santa Rosa, and Santa Cruz Islands ASBS"
+SC_Rocky_It,Forney,7210,34.0564849,-119.92204,SCFO,301,,,Channel Islands NMS,"San Miguel, Santa Rosa, and Santa Cruz Islands ASBS"
+SC_Rocky_It,Fossil Reef,7100,33.9932946,-120.23813,SRFR,200,,,Channel Islands NMS,"San Miguel, Santa Rosa, and Santa Cruz Islands ASBS"
+SC_Rocky_It,Fraser Cove,7220,34.0626447,-119.91905,SCFC,300,,,Channel Islands NMS,"San Miguel, Santa Rosa, and Santa Cruz Islands ASBS"
+SC_Rocky_It,Goat Harbor,7630,33.4167967,-118.39407,CTGH,602,Long Point (Catalina Island) State Marine Reserve,SMR,,
+SC_Rocky_It,Government Point,6400,34.4424,-120.45639,GPT,35,Point Conception State Marine Reserve,SMR,,
+SC_Rocky_It,Graduation Point,7706,33.0332743,-118.5756,GRP,803,,,,
+SC_Rocky_It,Heisler Park,6700,33.5425937,-117.78928,HEI,76,Laguna Beach State Marine Reserve,SMR,,Heisler Park Ecological Reserve ASBS
+SC_Rocky_It,Johnsons Lee,7140,33.90883,-120.08691,SRJL,202,,,Channel Islands NMS,"San Miguel, Santa Rosa, and Santa Cruz Islands ASBS"
+SC_Rocky_It,La Jolla Caves,6800,32.848614,-117.26535,LJC,72,Matlahuayl State Marine Reserve,SMR,,
+SC_Rocky_It,Landing Cove,7400,33.4813664,-119.0292,SBLC,500,,,Channel Islands NMS,Santa Barbara Island and Anacapa Island ASBS
+SC_Rocky_It,Lechuza Point,6560,34.0344576,-118.86179,LEC,75,Point Dume State Marine Conservation Area,SMCA,,Mugu Lagoon to Latigo Point ASBS
+SC_Rocky_It,Little Harbor,7650,33.3850252,-118.47524,CTLH,601,,,,"Santa Catalina Island - Subarea Two, North End of Little Harbor to Ben Weston Point ASBS"
+SC_Rocky_It,Marker Poles,7520,33.2187005,-119.49575,SNMP,701,,,,
+SC_Rocky_It,Middle West,7310,34.0058415,-119.39643,ANMW,402,Anacapa Island State Marine Reserve,SMR,Channel Islands NMS,Santa Barbara Island and Anacapa Island ASBS
+SC_Rocky_It,Muddy Canyon,6665,33.5657626,-117.83314,MUD,98,Crystal Cove State Marine Conservation Area,SMCA,,Irvine Coast Marine Life Refuge ASBS
+SC_Rocky_It,Mussel Shoals,6500,34.3555652,-119.44074,MUSH,41,,,,
+SC_Rocky_It,Navy North,6820,32.6927844,-117.25306,NANO,93,,,,
+SC_Rocky_It,North Head,7704,33.0328666,-118.60057,NOH,802,,,,
+SC_Rocky_It,NW Talcott,7110,34.0083856,-120.21368,SRNWT,201,,,Channel Islands NMS,"San Miguel, Santa Rosa, and Santa Cruz Islands ASBS"
+SC_Rocky_It,Old Stairs,6520,34.0662239,-118.9981,OLDS,42,,,,Mugu Lagoon to Latigo Point ASBS
+SC_Rocky_It,Paradise Cove,6580,34.0120046,-118.79214,PCOV,43,Point Dume State Marine Reserve,SMR,,Mugu Lagoon to Latigo Point ASBS
+SC_Rocky_It,Point Dume,6575,34.0003567,-118.80703,DUM,96,Point Dume State Marine Reserve,SMR,,Mugu Lagoon to Latigo Point ASBS
+SC_Rocky_It,Point Fermin,6620,33.70679,-118.28614,PTFM,45,,,,
+SC_Rocky_It,Point Vicente,6585,33.7410142,-118.40947,PTVC,88,Point Vicente State Marine Conservation Area,SMCA (No-Take),,
+SC_Rocky_It,Prisoners Harbor,7240,34.0201975,-119.68663,SCPH,305,,,Channel Islands NMS,"San Miguel, Santa Rosa, and Santa Cruz Islands ASBS"
+SC_Rocky_It,S Frenchys Cove,7330,34.0065527,-119.41104,ANSFC,401,Anacapa Island State Marine Conservation Area,SMCA,Channel Islands NMS,Santa Barbara Island and Anacapa Island ASBS
+SC_Rocky_It,Sea Lion Rookery,7410,33.4717384,-119.03075,SBSLR,501,Santa Barbara Island State Marine Reserve,SMR,Channel Islands NMS,Santa Barbara Island and Anacapa Island ASBS
+SC_Rocky_It,Sea Ridge,6804,32.8079867,-117.26793,SERI,92,South La Jolla State Marine Reserve,SMR,,
+SC_Rocky_It,Sequit Point,6540,34.0432346,-118.937,SEQ,74,,,,Mugu Lagoon to Latigo Point ASBS
+SC_Rocky_It,Shaws Cove,6680,33.5447298,-117.79974,SHCO,47,Laguna Beach State Marine Reserve,SMR,,
+SC_Rocky_It,Thousand Springs,7500,33.2849102,-119.52972,SNTS,700,,,,
+SC_Rocky_It,Trailer,7200,34.0518211,-119.90344,SCTR,302,,,Channel Islands NMS,"San Miguel, Santa Rosa, and Santa Cruz Islands ASBS"
+SC_Rocky_It,Tranquility Beach,7510,33.2656675,-119.4921,SNTB,702,,,,
+SC_Rocky_It,Two Harbors,7600,33.444353,-118.49888,CTTH,603,,,,"Santa Catalina Island - Subarea One, Isthmus Cove to Catalina Head ASBS"
+SC_Rocky_It,Valley,7260,33.9837241,-119.66588,SCVL,304,,,Channel Islands NMS,"San Miguel, Santa Rosa, and Santa Cruz Islands ASBS"
+SC_Rocky_It,West Cove,7700,33.01477,-118.60613,CLWC,99,,,,
+SC_Rocky_It,White Point,6600,33.71573,-118.31999,WHPT,44,,,,
+SC_Rocky_It,Willows Anchorage,7280,33.961885,-119.75493,SCWA,303,,,Channel Islands NMS,"San Miguel, Santa Rosa, and Santa Cruz Islands ASBS"
+SC_Rocky_It,Wind and Sea,6802,32.8328485,-117.28231,WISE,91,,,,

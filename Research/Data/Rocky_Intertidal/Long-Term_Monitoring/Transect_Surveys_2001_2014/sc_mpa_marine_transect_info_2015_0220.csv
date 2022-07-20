@@ -1,0 +1,68 @@
+SC_project_short_code,SiteID,TargetSpecies,TransectNumber,MethodCode,YearEst,MonthEst,DayEst
+SC_Rocky_It,ALEG,phyllospadix,1,T100,2001,12,1
+SC_Rocky_It,ALEG,phyllospadix,2,T100,2001,12,1
+SC_Rocky_It,ALEG,phyllospadix,3,T100,2001,12,1
+SC_Rocky_It,CAB3,egregia,5,10MT,1990,2,10
+SC_Rocky_It,CAB3,egregia,5,10MT,1990,2,10
+SC_Rocky_It,CAB3,egregia,5,10MT,1990,2,10
+SC_Rocky_It,CAB3,egregia,6,10MT,1990,2,10
+SC_Rocky_It,CAB3,egregia,6,10MT,1990,2,10
+SC_Rocky_It,CAB3,egregia,6,10MT,1990,2,10
+SC_Rocky_It,CAB3,phyllospadix,3,10MT,1990,2,10
+SC_Rocky_It,CAB3,phyllospadix,3,10MT,1990,2,10
+SC_Rocky_It,CAB3,phyllospadix,3,10MT,1990,2,10
+SC_Rocky_It,CAB3,phyllospadix,4,10MT,1990,2,10
+SC_Rocky_It,CAB3,phyllospadix,4,10MT,1990,2,10
+SC_Rocky_It,CAB3,phyllospadix,4,10MT,1990,2,10
+SC_Rocky_It,CAB3,red algae,1,10MT,1990,2,10
+SC_Rocky_It,CAB3,red algae,1,10MT,1990,2,10
+SC_Rocky_It,CAB3,red algae,1,10MT,1990,2,10
+SC_Rocky_It,CAB3,red algae,2,10MT,1990,2,10
+SC_Rocky_It,CAB3,red algae,2,10MT,1990,2,10
+SC_Rocky_It,CAB3,red algae,2,10MT,1990,2,10
+SC_Rocky_It,CARE,phyllospadix,4,T100,1999,10,23
+SC_Rocky_It,CARE,phyllospadix,4,T100,1999,10,23
+SC_Rocky_It,CARE,phyllospadix,5,T100,1999,10,23
+SC_Rocky_It,CARE,phyllospadix,5,T100,1999,10,23
+SC_Rocky_It,CARE,phyllospadix,6,T100,1999,10,23
+SC_Rocky_It,CARE,phyllospadix,6,T100,1999,10,23
+SC_Rocky_It,CARE,red algae,1,T100,1999,10,23
+SC_Rocky_It,CARE,red algae,1,T100,1999,10,23
+SC_Rocky_It,CARE,red algae,2,T100,1999,10,23
+SC_Rocky_It,CARE,red algae,2,T100,1999,10,23
+SC_Rocky_It,CARE,red algae,3,T100,1999,10,23
+SC_Rocky_It,CARE,red algae,3,T100,1999,10,23
+SC_Rocky_It,CARP,phyllospadix,1,T100,1992,2,29
+SC_Rocky_It,CARP,phyllospadix,2,T100,1992,2,29
+SC_Rocky_It,CARP,phyllospadix,3,T100,1992,2,29
+SC_Rocky_It,CLBS,egregia,1,T100,2010,1,28
+SC_Rocky_It,CLBS,egregia,2,T100,2010,1,28
+SC_Rocky_It,CLBS,egregia,3,T100,2010,1,28
+SC_Rocky_It,COPT,phyllospadix,1,T100,1992,2,28
+SC_Rocky_It,COPT,phyllospadix,2,T100,1992,2,28
+SC_Rocky_It,COPT,phyllospadix,3,T100,1992,2,28
+SC_Rocky_It,CRCO,phyllospadix,10,T100,1997,4,6
+SC_Rocky_It,CRCO,phyllospadix,11,T100,1997,4,6
+SC_Rocky_It,CRCO,phyllospadix,12,T100,1997,4,6
+SC_Rocky_It,CRCO,phyllospadix,13,T100,1997,4,6
+SC_Rocky_It,CRCO,phyllospadix,14,T100,1997,4,6
+SC_Rocky_It,CRCO,phyllospadix,15,T100,1997,4,6
+SC_Rocky_It,GPT,phyllospadix,1,T100,2001,3,7
+SC_Rocky_It,GPT,phyllospadix,2,T100,2000,11,13
+SC_Rocky_It,GPT,phyllospadix,3,T100,2000,11,13
+SC_Rocky_It,NANO,phyllospadix,3,T100,1999,10,25
+SC_Rocky_It,NANO,phyllospadix,3,T100,1999,10,25
+SC_Rocky_It,NANO,phyllospadix,4,T100,1999,10,25
+SC_Rocky_It,NANO,phyllospadix,4,T100,1999,10,25
+SC_Rocky_It,NANO,phyllospadix,5,T100,1999,10,25
+SC_Rocky_It,NANO,phyllospadix,5,T100,1999,10,25
+SC_Rocky_It,NANO,phyllospadix,6,T100,1999,10,25
+SC_Rocky_It,NANO,phyllospadix,6,T100,1999,10,25
+SC_Rocky_It,NANO,red algae,1,T100,1999,10,25
+SC_Rocky_It,NANO,red algae,1,T100,1999,10,25
+SC_Rocky_It,NANO,red algae,2,T100,1999,10,25
+SC_Rocky_It,NANO,red algae,2,T100,1999,10,25
+SC_Rocky_It,NANO,red algae,7,T100,2002,11,4
+SC_Rocky_It,PTFM,phyllospadix,1,T100,1999,10,24
+SC_Rocky_It,PTFM,phyllospadix,2,T100,1999,10,24
+SC_Rocky_It,PTFM,phyllospadix,3,T100,1999,10,24

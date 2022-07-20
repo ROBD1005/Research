@@ -1,0 +1,377 @@
+---
+title: "Heat Maps and Time Series"
+author: "Robert Dellinger"
+date: "5/16/2022"
+output: html_document
+---
+
+# Install Packages 
+
+```{r setup, include=TRUE, message = FALSE}
+knitr::opts_chunk$set(warning=FALSE, fig.algin="center")
+
+devtools::install_github("rmendels/xtractomatic")
+library(lubridate)
+library(tidyverse)
+library(xtractomatic)
+library(rerddap)
+library(sp)
+library(spData)
+library(oce)
+library(ocedata)
+```
+
+Data was downloaded from https://shorestations.ucsd.edu/ for the shore station of Point Dume, CA there are other stations for the span of the California Coast availble to download there. 
+
+# Sea Surface Temperature Heat Map Using Buoy Data off of Point Dume, California. 
+
+
+```{r, Downloading Data and Data Wrangling}
+
+pointdume.data <- read_csv("/Users/robertdellinger/Documents/Research/Data/Temperature_Data/scripps.pointdume.sst.1956.2022.csv")
+
+names(pointdume.data) <- c("year","month", "day", "SST")
+
+pointdume.data.clean <- pointdume.data %>% 
+  mutate(datetime = as.Date(paste(year, month, day, sep="-")),
+         SST= as.numeric(SST)) %>% 
+  filter(year >= 1960, year <= 2020) %>% 
+  select(datetime, SST) %>% 
+  arrange(datetime) 
+  
+pointdume.data.clean <- pointdume.data.clean[!(format(pointdume.data.clean$datetime,"%m") == "02" & format(pointdume.data.clean$datetime, "%d") == "29"), , drop = FALSE] #omit leap years
+
+
+```
+
+
+```{r, Time Series Heatmap }
+
+## Creating a Time Series for Point Dume Water Temperature 
+
+## define the total number of days in a year
+days = 1:365
+#define the total number of years as indicated by the data
+years = 1960:2020
+
+## make a matrix using the origin temperature values
+pointdume.mat = matrix(pointdume.data.clean$SST, nrow = length(days)) 
+
+## plot the matrix
+imagep(x = years, y = days, z = pointdume.mat %>% t(), filledContour = F, 
+       ylim = c(365,0),
+       ylab = "Day", 
+       col = oceColors9A(120),
+       zlab = expression(SST~(degree *C)))
+## add contour
+contour(x = years, y = days, z = pointdume.mat %>% t(), add = TRUE, col = 1, nlevels = 3)
+
+
+```
+
+#Interpolating Missing Values
+```{r}
+
+## define the total number of days in a year
+days = 1:365
+#define the total number of years as indicated by the data
+years = 1960:2020
+
+## create day and year variables from date
+pointdume.data.clean = pointdume.data.clean %>% mutate(year = year(datetime), day_year = yday(datetime))
+
+## interpolate the missing values
+interpolated.temperature = interpBarnes(x = pointdume.data.clean$day_year, 
+                                        y = pointdume.data.clean$year, 
+                                        z = pointdume.data.clean$SST, 
+                                        xgl = 365, 
+                                        ygl = 60)
+
+```
+
+#
+#Converting a Matrix to a Table and Time Series
+
+```{r}
+
+## extracted the matrix of interpolated values
+interpolated.sst.mat = interpolated.temperature$zg
+
+## tranform the matrix into the tabular form and combine the interpolated values with the raw
+interpolated.sst.tb = interpolated.sst.mat %>% 
+  as.tibble() %>% 
+  gather(key = "year", value = "SST", 1:60)  %>%
+  select(-year, sst.interp = SST) %>% 
+  bind_cols()
+
+# create a date sequence
+dates = seq(as.Date("1960-01-01"), to=as.Date("2019-12-31"), "days")
+
+#remove elap year dates
+dates <- dates[!(format(dates,"%m") == "02" & format(dates, "%d") == "29"), drop = FALSE] #omit leap years
+
+
+#Sequence the number of days throughout the time frame
+interpolated.sst.tb = interpolated.sst.tb %>% 
+  mutate(date=dates) %>% 
+   select(date, sst.interp)
+
+
+```
+
+
+
+#Plotting Interpolated Data Heatmap Using ggplot
+
+```{r}
+
+interpolated.sst.tb = interpolated.sst.tb %>% mutate(year = year(date), day.year = yday(date))
+
+ggplot(data = interpolated.sst.tb, aes(y = day.year, x = year))+
+  geom_raster(aes(fill =  sst.interp), interpolate = F)+
+  geom_contour(aes(z =  sst.interp), col = "black", bins = 3 )+
+  theme(plot.background = element_blank(),
+        legend.position = "bottom",
+        panel.border = element_blank(),
+        axis.text = element_text(colour = "black", size = 11),
+        axis.title = element_text(colour = 1, size = 12),
+        legend.key.width = unit(15, "mm"),
+        legend.key.height = unit(4, "mm"),
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size = 11))+
+  scale_x_continuous(breaks = seq(1960,2020,5), position = "top") +
+  scale_y_reverse(breaks = seq(0,365, 30))+ #monthly scale
+  scale_fill_gradientn(colours = oceColorsJet(210), 
+                       na.value = NA, 
+                       breaks =seq(10,30,2))+ 
+  guides(fill = guide_colorbar(title = expression (Temperature~(degree~C)), 
+                               title.position = "top", title.hjust = 0.5,
+                               title.vjust = 0.25, 
+                               label.vjust = 1, raster = TRUE, frame.colour = NULL,
+                               ticks.colour = 1, reverse = FALSE)) +
+  labs(x = "", y = "Number of Days in a Year")
+
+
+```
+
+
+# Time Series 
+
+The ts() function convert a numeric vector into an R time series object. The format is ts(vector, start=, end=, frequency=) where start and end are the times of the first and last observation and frequency is the number of observations per unit time (1=annual, 4=quartely, 12=monthly,365.24=daily, etc.). Our dataset contain daily sea surface temperature observations from 1997-01-01 to 2017-12-31. The daily time series object was created with the line code in the chunk below
+
+```{r}
+
+
+temperature.ts = ts(data = interpolated.sst.tb$sst.interp, 
+                    start = c(1960,1), 
+                    frequency = 365.24)
+
+temperature.ts %>% plot(xlab = "", las = 1,
+                  ylab = expression(Temperature~(degree*C)))
+
+```
+
+
+#Using ggplot 
+
+```{r}
+
+ggplot(data = interpolated.sst.tb, aes(x=date, y=sst.interp))+
+  geom_line()+
+  geom_smooth(span=0.25, color="red") +
+  theme(axis.text = element_text(size = 11, colour = "black"),
+        axis.title = element_text(size = 14, colour = "black"),
+        panel.border = element_rect(colour = "black", fill = NA),
+        panel.background = element_rect(fill = "white"),
+        panel.grid = element_blank(), 
+        panel.grid.major.y = element_line(colour = "grey70", size = 0.25, linetype = 3)) +
+  scale_y_continuous(breaks = seq(8, 24, 2)) +
+  labs(x = "", y = expression(Temperature~(degree*C)))
+```
+# Identify shifts in mean and/or variance in a time series
+
+Our second object is to identify the change in mean or variance of the time series. This phonmenon is widely referred as changepoints—an instance in time where the statistical properties before and after this time point differ. We can calculate the optimal position and number of changepoints for daily time series using the changepoint::cpt.meanvar() function and print the summary of the results as the chunk highlight
+
+```{r}
+
+library(changepoint)
+
+daily.changepoints = daily.ts %>% 
+  changepoint::cpt.meanvar() 
+
+daily.changepoints %>% summary()
+
+daily.changepoints %>% 
+  param.est() %>% 
+  data.frame() %>% 
+  mutate(segment = c("First", "Second")) %>% select(segment, mean, variance) %>%
+  kableExtra::kable(format = "html", digits = 2, 
+                    caption = "Mean and variance of change point for daily sst",
+                    col.names = c("Segment", "Mean", "Variance")) 
+
+daily.changepoints %>% 
+  changepoint::plot(xlab = "", ylab = expression(Temperature~(degree*C)), las = 1)
+
+
+```
+
+```{r}
+
+#Means for Months and Years
+interpolated.sst.split = interpolated.sst.tb %>% 
+  mutate(week = week(date) %>% as.integer(), 
+         month = month(date) %>% as.integer(),
+         year = year(date) %>% as.integer()) %>%
+  select(date, week, month, year, SST = sst.interp)
+
+## monthly mean temperature
+monthly.temperature = interpolated.sst.split %>% 
+  group_by(month, year) %>% 
+  summarise(SST = median(SST, na.rm = T))%>%
+  mutate(month_year = paste(year, month, sep="-"),
+         month_year = as.yearmon(month_year)) %>% 
+  arrange(month_year) 
+
+## monthly mean temperature for 2020
+monthly.temperature.decade = monthly.temperature %>% 
+  filter(year >= 2010, year <= 2020) 
+
+## annual mean temperature
+annual.temperature = interpolated.sst.split %>% 
+  group_by(year) %>% 
+  summarise(SST = mean(SST, na.rm = T))%>%
+  ungroup() %>% 
+  arrange(year)
+
+
+```
+
+#Monthly and Annual Averages
+
+```{r}
+
+## plot monthly ts
+ggplot(data = monthly.temperature, aes(x=month_year, y=SST))+ 
+  geom_line()+
+  theme(axis.text = element_text(size = 11, colour = "black"),
+        axis.title = element_text(size = 14, colour = "black"),
+        panel.border = element_rect(colour = "black", fill = NA),
+        panel.background = element_rect(fill = "white"),
+        panel.grid = element_blank(), 
+        panel.grid.major.y = element_line(colour = "grey70", size = 0.25, linetype = 3)) +
+  labs(x = "", y = expression(Temperature~(degree*C)))
+
+## plot monthly ts for a decade (2010-2020)
+ggplot(data = monthly.temperature.decade, aes(x=month_year, y=SST))+ 
+  geom_line()+
+  theme(axis.text = element_text(size = 11, colour = "black"),
+        axis.title = element_text(size = 14, colour = "black"),
+        panel.border = element_rect(colour = "black", fill = NA),
+        panel.background = element_rect(fill = "white"),
+        panel.grid = element_blank(), 
+        panel.grid.major.y = element_line(colour = "grey70", size = 0.25, linetype = 3)) +
+  labs(x = "", y = expression(Temperature~(degree*C)))
+
+## plot annual ts
+ggplot(data = annual.temperature, aes(x=year, y=SST))+ 
+  geom_line()+
+  theme(axis.text = element_text(size = 11, colour = "black"),
+        axis.title = element_text(size = 14, colour = "black"),
+        panel.border = element_rect(colour = "black", fill = NA),
+        panel.background = element_rect(fill = "white"),
+        panel.grid = element_blank(), 
+        panel.grid.major.y = element_line(colour = "grey70", size = 0.25, linetype = 3)) +
+  labs(x = "", y = expression(Temperature~(degree*C)))
+
+```
+
+#Forecasting Time Series using the prophet Package
+
+```{r}
+
+library(prophet)
+
+interpolated.mean = interpolated.sst.tb %>% 
+  select(ds=date, y=sst.interp)
+
+m = prophet(df =interpolated.mean,
+          weekly.seasonality=TRUE, 
+          daily.seasonality=TRUE)
+
+future = make_future_dataframe(m = m, periods = 120, freq = "month")
+
+future.temp = stats::predict(m, future)
+```
+
+```{r}
+
+plot(m,future.temp) +
+  theme_bw()+
+  theme(axis.text = element_text(size = 12), axis.title = element_text(size = 14))+
+  scale_y_continuous(breaks = seq(8, 24, 2)) +
+  labs(x = NULL, y = "Temperature (Degrees Celsius")
+
+```
+```{r}
+prophet_plot_components(m = m, fcst = future.chl) 
+```
+```{r}
+dyplot.prophet(x = m, fcst = future.chl,uncertainty = TRUE )
+```
+
+
+# Creating a Heatmap Using Shore Station Data from SCCOSS
+
+```{r}
+sccoss.data <- read_csv("/Users/robertdellinger/Documents/Research/Data/Temperature_Data/sccoss.santamonica.sst.2012.2022.csv")
+
+names(sccoss.data) <- c("datetime","SST")
+
+#clean the data
+sccoss.data.clean  <- sccoss.data[-1,] %>% #remove first column
+  mutate(datetime = str_remove(datetime, "Z"), #remove z from string
+         date = as.Date(ymd(str_split_fixed(datetime, "T", n=Inf)[,1])), #split string into date
+         time= str_split_fixed(datetime, "T", n=Inf)[,2], #split string into time
+         SST = as.numeric(SST)) %>% #change sst to a numeric value
+  filter(SST>10 & SST<30) %>%
+  select(date, SST) 
+
+#calculate daily mean SST
+sccoss.summary <- sccoss.data.clean %>% 
+  group_by(date) %>% 
+  summarise(SST.mean = mean(SST, na.rm=FALSE)) %>% 
+  select(date, SST = SST.mean)
+
+sccoss.summary <- sccoss.summary[!(format(sccoss.summary$date,"%m") == "02" & format(sccoss.summary$date, "%d") == "29"), , drop = FALSE] #omit leap years
+```
+
+```{r}
+## define the total number of days in a year
+days = 1:365
+#define the total number of years as indicated by the data
+years = 2012:2021
+
+## create day and year variables from date
+sccoss.summary = sccoss.summary %>% mutate(year = year(date), day_year = yday(date))
+
+## interpolate the missing values
+sccoss.interpolated.temperature = interpBarnes(x = sccoss.summary$day_year, 
+                                        y = sccoss.summary$year, 
+                                        z = sccoss.summary$SST, 
+                                        xgl = 365, 
+                                        ygl = 9)
+
+sccoss.interpolated.temperature <- sccoss.interpolated.temperature[!(format(sccoss.interpolated.temperature$date,"%m") == "02" & format(sccoss.interpolated.temperature$date, "%d") == "29"), drop = FALSE] #omit leap years
+
+
+## make a matrix using the origin temperature values
+sccoss.interpolated.temperature.mat = matrix(future.interpolated.temperature$zg, nrow = length(days))[1:365, 1:9]
+
+## plot the matrix
+imagep(x = years, y = days, z = sccoss.interpolated.temperature.mat %>% t(), filledContour = F, 
+       ylim = c(365,0),
+       ylab = "Day", 
+       col = oceColors9A(120),
+       zlab = expression(SST~(degree *C)))
+
+```
