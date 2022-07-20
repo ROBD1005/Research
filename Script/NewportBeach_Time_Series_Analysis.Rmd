@@ -21,23 +21,22 @@ library(oce)
 library(ocedata)
 ```
 
-Data was downloaded from https://shorestations.ucsd.edu/ for the shore station of Newport Beach, CA there are other stations for the span of the California Coast availble to download on the website. Newport Beach Pier measurements collected by the City of Newport Beach Marine Operations Division.
+Data was downloaded from https://shorestations.ucsd.edu/ for the shore station of Newport Beach, CA there are other stations for the span of the California Coast available to download on the website. Newport Beach Pier measurements collected by the City of Newport Beach Marine Operations Division.
 
-Data Set: Newport Beach/Balboa Pier, 1925 – 2020
+Data Set: Newport Beach/Balboa Pier, 1925 – 2020.
 
 # Sea Surface Temperature Heat Map Using Buoy Data off of Newport Beach, California. 
 
-
 ```{r, Downloading Data and Data Wrangling}
 
-newport.data <- read_csv("/Users/robertdellinger/Documents/Research/Data/Temperature_Data/scripps.newportbeach.sst.1925.2022.csv")
+newport.temp.data <- read_csv("/Users/robertdellinger/Documents/Research/Data/Temperature_Data/scripps.newportbeach.sst.1925.2022.csv")
 
-names(newport.data) <- c("year","month", "day", "NA1", "NA2", "SST", "NA3", "NA4")
+names(newport.temp.data) <- c("year","month", "day", "NA1", "NA2", "SST", "NA3", "NA4")
 
-newport.data <- newport.data[-c(1:29),] %>% 
+newport.temp.data <- newport.temp.data[-c(1:29),] %>% 
   select(year, month, day, SST)
 
-newport.data.clean <- newport.data %>% 
+newport.data.clean <- newport.temp.data %>% 
   mutate(datetime = as.Date(paste(year, month, day, sep="-")),
          SST= as.numeric(SST)) %>% 
   filter(year >= 1925, year <= 2020) %>% 
@@ -136,3 +135,27 @@ ggplot(data = interpolated.sst.tb, aes(x=date, y=sst.interp))+
   scale_y_continuous(breaks = seq(8, 24, 2)) +
   labs(x = "", y = expression(Temperature~(degree*C)))
 ```
+
+
+# Salinity Buoy Data off of Newport Beach, California. 
+
+```{r}
+
+newport.salinity.data <- read_csv("/Users/robertdellinger/Documents/Research/Data/Temperature_Data/scripps.newportbeach.sst.1925.2022.csv")
+
+names(newport.data) <- c("year","month", "day", "NA1", "NA2", "SST", "NA3", "NA4")
+
+newport.data <- newport.data[-c(1:29),] %>% 
+  select(year, month, day, SST)
+
+newport.data.clean <- newport.data %>% 
+  mutate(datetime = as.Date(paste(year, month, day, sep="-")),
+         SST= as.numeric(SST)) %>% 
+  filter(year >= 1925, year <= 2020) %>% 
+  select(datetime, SST) %>% 
+  arrange(datetime) %>% 
+  na.omit()
+  
+
+```
+
