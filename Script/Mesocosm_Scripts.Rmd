@@ -23,7 +23,9 @@ library(ggplot2)
 
 ```{r, warning=FALSE, echo=FALSE}
 
-files <- list.files("/Users/robertdellinger/Documents/Research/Data/Experiment_Data/Mesocosm_Tank_Temperatures/Tanks", pattern = ".csv", full.names = TRUE) %>% 
+setwd("Data")
+
+files <- list.files(here("Data/Experiment_Data/Mesocosm_Tank_Temperatures/Tanks"), pattern = ".csv", full.names = TRUE) %>% 
   sort(decreasing = TRUE) #files ordered by decreasing values
 
 temp.data <- files %>%  # read csv files into one data frame

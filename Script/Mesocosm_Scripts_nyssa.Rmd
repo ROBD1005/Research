@@ -15,6 +15,7 @@ library(tidymodels)
 library(here)
 library(lubridate)
 library(ggplot2)
+library(stringr)
 
 
 ```
@@ -27,48 +28,15 @@ files <- list.files(here("Data","Experiment_Data","Mesocosm_Tank_Temperatures","
   sort(decreasing = TRUE) #files ordered by decreasing values
 
 temp.data <- files %>%  # read csv files into one data frame
-  set_names()%>%
-  map_dfr(~ read_csv(.x, skip=4, col_names = c("Date", "Temp"), col_types = list(col_character(), col_double())), #skip first rows of metadata and rename columns
+  set_names()%>% #set names of file as column
+  map_dfr(~ read_csv(.x, skip=4, col_names = c("Date", "Temp"), col_types = list(col_character(), col_double())), #skip metadata
           .id="filename") %>%
-  select(filename, Date, Temp)
+  mutate(Tank_ID= str_extract(filename, pattern = regex("TNK-[0-9]"| "TNK-[A-Z]")), #string extract from file name
+         Tank_ID= str_replace(Tank_ID, pattern="-", replacement="_"), #replace pattern 
+         Date=ymd_hms(Date), #change to date format
+         Time = hms(format(Date, format = "%H:%M:%S"))) %>%  #separate date and time columns 
+  select(Tank_ID, Date, Temp) #selecting columns 
   
-  
-  
-  #labeling the File ID
-  mutate(Tank_ID = case_when(File_Number==1 ~ "TNK_9", 
-                                             File_Number==2 ~ "TNK_8",
-                                             File_Number==3 ~ "TNK_7",
-                                             File_Number==4 ~ "TNK_6",
-                                             File_Number==5 ~ "TNK_5",
-                                             File_Number==6 ~ "TNK_4",
-                                             File_Number==7 ~ "TNK_3",
-                                             File_Number==8 ~ "TNK_2",
-                                             File_Number==9 ~ "TNK_18",
-                                             File_Number==10 ~ "TNK_16",
-                                             File_Number==11 ~ "TNK_15",
-                                             File_Number==12 ~ "TNK_14",
-                                             File_Number==13 ~ "TNK_13",
-                                             File_Number==14 ~ "TNK_12",
-                                             File_Number==15 ~ "TNK_11",
-                                             File_Number==16 ~ "TNK_10"), 
-  Tank_Treatment = case_when(Tank_ID=="TNK_9" ~ 12, #Relabeling tanks 
-                                             Tank_ID=="TNK_8" ~ 26,
-                                             Tank_ID=="TNK_7" ~ 24,
-                                             Tank_ID=="TNK_6" ~ 22,
-                                             Tank_ID=="TNK_5" ~ 20,
-                                             Tank_ID=="TNK_4" ~ 18,
-                                             Tank_ID=="TNK_3" ~ 16,
-                                             Tank_ID=="TNK_2" ~ 14,
-                                             Tank_ID=="TNK_18" ~ 12,
-                                             Tank_ID=="TNK_16" ~ 26,
-                                             Tank_ID=="TNK_15" ~ 24,
-                                             Tank_ID=="TNK_14" ~ 22,
-                                             Tank_ID=="TNK_13" ~ 20,
-                                             Tank_ID=="TNK_12" ~ 18,
-                                             Tank_ID=="TNK_11" ~ 16,
-                                             Tank_ID=="TNK_10" ~ 14)) %>% 
-  select(Tank_ID, Date, Temp, Tank_Treatment) #selecting for the file number, date and temperature data
-
 
 ```
 
@@ -77,7 +45,6 @@ temp.data <- files %>%  # read csv files into one data frame
 
 #cleaning and filtering data
 temp.clean <- temp.data %>% 
-  mutate(Time = hms(format(Date, format = "%H:%M:%S")) )%>% #create time column 
   mutate(Tide = ifelse(Time > hms("12:00:00") & Time < hms("18:00:00") | Time > hms("00:00:00") & Time < hms("06:00:00"), "Low","High")) %>% #tide column
   filter(Date >= "2022-07-18",
          Date <= "2022-07-19") %>% 
@@ -101,7 +68,7 @@ air.temperature.summary <- air.temperature %>%
 water.temperature <- temp.clean %>%
   filter(Time > hms("07:00:00") & Time < hms("11:00:00") | Time > hms("19:00:00") & Time < hms("23:00:00"))
 
-#air temperature summary statistics 
+#water temperature summary statistics 
 water.temperature.summary <- water.temperature %>% 
   group_by(Tank_ID) %>% 
   summarise(mean.temp=mean(Temp, na.rm=TRUE),
