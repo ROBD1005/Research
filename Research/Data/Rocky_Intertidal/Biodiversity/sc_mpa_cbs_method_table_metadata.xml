@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<dataTable id="" scope="document">
+	<physical scope="document">
+		<objectName>sc_mpa_cbs_method_table</objectName>
+	</physical>
+	<attributeList>
+		<attribute id="" scope="document">
+			<attributeName>SC_project_short_code</attributeName>
+			<attributeLabel>SC project short code</attributeLabel>
+			<attributeDefinition>The unique code for each baseline program project funded through the SC MPA Baseline Program. This code refers to a specific entry on the SC_MPA_BaselineProgramInformation_LookupTable. </attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any text</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>method_code</attributeName>
+			<attributeLabel>method code</attributeLabel>
+			<attributeDefinition>Unique numeric lookup code that is referenced by the Biodiversity Survey observation tables, used to designate between the different methods of sampling the site.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any integer 1 to N</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>method_name</attributeName>
+			<attributeLabel>method name</attributeLabel>
+			<attributeDefinition>An abbreviated name for the method that describes the type of sampling done at the site.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any text</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>method_description</attributeName>
+			<attributeLabel>method description</attributeLabel>
+			<attributeDefinition>Full text description of the method used to sample the site.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any text</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+	</attributeList>
+</dataTable>

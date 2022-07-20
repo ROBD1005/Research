@@ -1,0 +1,64 @@
+---
+title: "ERDAPP Newport Beach"
+author: "Robert Dellinger"
+date: "5/16/2022"
+output: html_document
+---
+
+# Install Packages 
+
+```{r setup, include=TRUE, message = FALSE}
+knitr::opts_chunk$set(warning=FALSE, fig.algin="center")
+
+devtools::install_github("rmendels/xtractomatic")
+library(lubridate)
+library(tidyverse)
+library(xtractomatic)
+library(rerddap)
+library(sp)
+library(spData)
+library(oce)
+library(ocedata)
+```
+
+# Call NOAA servers and Download Daily Data Set
+
+```{r}
+
+
+csv <- read_csv("/Users/robertdellinger/Documents/Research/Data/Temperature_Data/sccoss.newportbeach.sst.pH.2018.2022.csv")
+
+sccoos.newport.data <- csv[-1,] %>% 
+  mutate(datetime = str_remove(time, "Z"), #remove z from string
+         date = as.Date(ymd(str_split_fixed(datetime, "T", n=Inf)[,1])), #split string into date
+         time= str_split_fixed(datetime, "T", n=Inf)[,2], #split string into time
+                hour = hour(hms(as.character(time)))) %>% 
+  filter(date < ymd("2020-05-01"), #filter years
+         date > ymd("2018-01-01")) %>% 
+  dplyr::select(date, hour, temperature, pH)
+  
+sccoos.summary.hourly <- sccoos.newport.data %>% 
+  group_by(date, hour)%>% # group date
+  summarise(SST.mean = mean(temperature, na.rm=TRUE), #calculate mean
+            pH.mean = mean(pH, na.rm=TRUE))
+  
+sccoos.summary.daily <- sccoos.newport.data %>% 
+  group_by(date)%>% # group date
+  summarise(SST.mean = mean(temperature, na.rm=TRUE), #calculate mean
+            pH.mean = mean(pH, na.rm=TRUE))
+
+```
+```{r}
+
+# make the plot and add labels
+sst.plot <- ggplot(sccoos.summary.hourly, aes(x=date, y=pH.mean)) + #date by mean sst
+  geom_line(aes(x=date, y=pH.mean), color="darkcyan", alpha=0.5) +
+  ylab("pH") +  #add labels
+  xlab("Date") +
+labs(title = "Mean pH in Los Angeles, CA", subtitle = "(Data: Southern California Coastal Ocean Observation Station, Newport Beach)") +
+  theme_bw(base_size = 9) #
+
+sst.plot
+
+```
+

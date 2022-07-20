@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<dataTable id="" scope="document">
+	<physical scope="document">
+		<objectName>sc_mpa_intertidal_site_table</objectName>
+	</physical>
+	<attributeList>
+		<attribute id="" scope="document">
+			<attributeName>SC_project_short_code</attributeName>
+			<attributeLabel>SC project short code</attributeLabel>
+			<attributeDefinition>The unique code for each baseline program project funded through the SC MPA Baseline Program. This code refers to a specific entry on the SC_MPA_BaselineProgramInformation_LookupTable. </attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any text</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>intertidal_sitename</attributeName>
+			<attributeLabel>intertidal sitename</attributeLabel>
+			<attributeDefinition>The site where the intertidal survey was conducted along the West Coast of North America. Each site name corresponds to a unique location.</attributeDefinition>
+			<measurementScale>			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>SiteOrder</attributeName>
+			<attributeLabel>Site Order</attributeLabel>
+			<attributeDefinition>Used to order the sites geographically along the coast. Actual values are arbitrary, and should not be used for site identification.</attributeDefinition>
+			<measurementScale>
+				<ordinal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any integer from 1 to N</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</ordinal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>intertidal_Latitude</attributeName>
+			<attributeLabel>intertidal Latitude</attributeLabel>
+			<attributeDefinition>The number of degrees North of the equator, expressed in decimal degrees.</attributeDefinition>
+			<measurementScale>
+				<ratio>
+					<unit>
+						<standardUnit>degree</standardUnit>
+					</unit>
+					<precision>.0001</precision>
+					<numericDomain>
+						<numberType></numberType>
+					</numericDomain>
+				</ratio>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>intertidal_Longitude</attributeName>
+			<attributeLabel>intertidal Longitude</attributeLabel>
+			<attributeDefinition>The number of degrees West of the Prime Meridian, expressed in decimal degrees.</attributeDefinition>
+			<measurementScale>
+				<ratio>
+					<unit>
+						<standardUnit>degree</standardUnit>
+					</unit>
+					<precision>.0001</precision>
+					<numericDomain>
+						<numberType></numberType>
+					</numericDomain>
+				</ratio>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>SiteID</attributeName>
+			<attributeLabel>Long Term Monitoring Site ID</attributeLabel>
+			<attributeDefinition>Unique Long Term Monitoring survey lookup code that is referenced by the observation tables. If this field is blank, Long Term Monitoring surveys were not done at this site.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any text</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>cbs_SiteCode</attributeName>
+			<attributeLabel>Biodiversity Site Code</attributeLabel>
+			<attributeDefinition>Unique Biodiversity survey lookup code that is referenced by the observation tables. If this field is blank, Biodiversity surveys were not done at this site.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any integer 1 to N</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>MPA_name</attributeName>
+			<attributeLabel>MPA name</attributeLabel>
+			<attributeDefinition>The name of the MPA where the referenced site is located. If this field is blank, the referenced site is not located within an MPA. This name refers to a specific entry on the SC_MPA_BoundaryInformation_LookupTable. </attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Name of the MPA as identified by the California Department of Fish and Wildlife (CDFW) http://www.dfg.ca.gov/mlpa</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>MPA_designation</attributeName>
+			<attributeLabel>MPA designation</attributeLabel>
+			<attributeDefinition>Describes the type of California Marine Protected Area (MPA) that the site is located in, as defined by the California Department of Fish and Wildlife. If this field is blank, the referenced site is not located within an MPA, or is not a reference site for an existing MPA site.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<enumeratedDomain enforced="yes">
+							<codeDefinition>
+								<code>SMCA</code>
+								<definition>State Marine Conservation Area. May limit recreational and/or commercial take to protect a specific resource or habitat.</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code>SMP</code>
+								<definition>State Marine Park. May allow recreational take, or limit it in some way, but does not allow commercial take.</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code>SMR</code>
+								<definition>State Marine Reserve. The most restrictive classification, these are no‐take areas (i.e. extractive activities are prohibited, and it is unlawful to injure, damage, take, or possess any living, geological, or cultural marine resource, except under a scientific collecting permit or authorized research, restoration, or monitoring).</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code>SMRMA</code>
+								<definition>State Marine Recreational Management Area. A non‐terrestrial marine or estuarine area designated so the managing agency may provide, limit, or restrict recreational opportunities to meet other than purely local needs while preserving basic resource values for present and future generations.</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code>Special Closure</code>
+								<definition>Special Closures have varying degrees of protection.</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code></code>
+								<definition></definition>
+							</codeDefinition>
+						</enumeratedDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>NMS_name</attributeName>
+			<attributeLabel>NMS name</attributeLabel>
+			<attributeDefinition>The name of the National Marine Sanctuary (NMS) where the referenced site is located. If this field is blank, the referenced site is not located within an NMS.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Name of the NMS region as identified by the National Oceanic and Atmospheric Administration (NOAA) http://sanctuaries.noaa.gov/welcome.html</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>ASBS_name</attributeName>
+			<attributeLabel>ASBS name</attributeLabel>
+			<attributeDefinition>The name of the Area of Special Biological Significance (ASBS) where the referenced site is located. If this field is blank, the referenced site is not located within an ASBS.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Name of the ASBS region as identified by the State Water Resources Control Board (SWRCB) http://www.swrcb.ca.gov</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+	</attributeList>
+</dataTable>

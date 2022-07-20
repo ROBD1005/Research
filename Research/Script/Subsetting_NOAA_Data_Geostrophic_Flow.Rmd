@@ -1,0 +1,156 @@
+---
+title: "Downloading and Subsetting NOAA Data"
+author: "Robert Dellinger"
+date: "5/16/2022"
+output: html_document
+---
+
+# Install Packages 
+
+```{r setup, include=TRUE, message = FALSE}
+knitr::opts_chunk$set(warning=FALSE, fig.algin="center")
+
+devtools::install_github("rmendels/xtractomatic")
+library(lubridate)
+library(tidyverse)
+library(xtractomatic)
+library(rerddap)
+library(sp)
+library(spData)
+library(oce)
+library(ocedata)
+```
+
+# Call NOAA servers and Download Daily Data Set
+
+```{r}
+
+servers() #call on server
+
+# use result  = searchData("varname:ssh") to get data from server
+daily.dataset = searchData("datasetname:1day")
+
+daily.dataset %>% glimpse() #visualize data
+
+```
+
+Once you have identified the datasetname of the daily product, Use the xtracto_3D() function from xtractomatic package to download the file by specifying the geogrpahical extent and time bound of interest.
+
+
+# Extracting U Values for Geostrophic Currents (erdTAugeo1day)
+
+```{r}
+lon.lim = c(-126,-116) # longitude
+lat.lim = c(32,40) # latitude
+time.lim = c("2012-08-01", "2010-08-12")
+
+u = xtracto_3D(dtype = "erdTAugeo1day", xpos = lon.lim, ypos = lat.lim, tpos = time.lim)
+
+lon = u$longitude
+lat = u$latitude
+time = u$time %>%as.Date()
+u.data = u$data 
+
+## obtain dimensions
+lon %>% length(); lat %>% length(); time %>% length(); u.data %>% dim()
+
+dimension = data.frame(lon, u.data[,,1]) %>% dim()
+
+## convert the array into data frame
+u.tb = data.frame(lon, u.data[,,1]) %>% 
+  as_tibble() %>% 
+  gather(key = "lati", value = "u", 2:dimension[2]) %>% 
+  mutate(lat = rep(lat, each = dimension[1]), time = time[1]) %>% 
+  select(lon,lat, time, u)
+
+```
+
+# Extracting V Values for Geostrophic Currents (erdTAugeo1day)
+
+```{r}
+v = xtracto_3D(dtype = "erdTAvgeo1day", xpos = lon.lim, ypos = lat.lim, tpos = time.lim)
+
+lon = v$longitude
+lat = v$latitude
+time = v$time%>%as.Date()
+v.data = v$data 
+
+v.tb = data.frame(lon, v.data[,,1]) %>% 
+  as_tibble() %>% 
+  gather(key = "lati", value = "v", 2:dimension[2]) %>% 
+  mutate(lat = rep(lat, each = dimension[1]), time = time[1]) %>% 
+  select(lon,lat, time, v)
+
+```
+
+# Extracting Sea Surface Height Values for Geostrophic Currents (erdTAugeo1day)
+
+```{r}
+ssh = xtracto_3D(dtype = "erdTAssh1day",xpos = lon.lim, ypos = lat.lim, tpos = time.lim)
+
+lon = ssh$longitude
+lat = ssh$latitude
+time = ssh$time%>%as.Date()
+ssh.data = ssh$data 
+
+ssh.tb = data.frame(lon, ssh.data[,,1]) %>% 
+  as_tibble() %>% 
+  gather(key = "lati", value = "ssh", 2:dimension[2]) %>% 
+  mutate(lat = rep(lat, each = dimension[1]), time = time[1]) %>% 
+  select(lon,lat, time, ssh)
+```
+
+#Data Wrangling and Interp
+
+```{r}
+ssh.in = oce::interpBarnes(x = ssh.tb$lon, y = ssh.tb$lat, z = ssh.tb$ssh)
+dimension = data.frame(lon = ssh.in$xg, ssh.in$zg) %>% dim()
+
+ssh.in = data.frame(lon = ssh.in$xg, ssh.in$zg) %>% 
+  as_tibble() %>% 
+  gather(key = "lati", value = "ssh", 2:dimension[2]) %>% 
+  mutate(lat = rep(ssh.in$yg, each = dimension[1]), time = time[1]) %>% 
+  select(lon,lat, time, ssh)
+
+#stitch together the dataframe
+aviso = ssh.tb %>% 
+  bind_cols(u.tb %>%select(u),
+            v.tb %>% select(v))
+
+#calculate velocity 
+geostrophic = aviso %>% 
+  mutate(vel =sqrt(u^2+v^2))
+
+
+```
+
+
+
+
+#Vsiualize NOAA data (Geostrophic Flow)
+
+```{r, fig.cap="Figure 2: geostrophic current overalid on the sea surface height"}
+
+lonlim = c(-126,-116) # longitude
+latlim = c(32,40) # latitude
+
+ggplot()+
+  metR::geom_contour_fill(data = ssh.in, aes(x = lon, y = lat, z = ssh), bins = 120)+
+  metR::geom_vector(data = aviso, aes(x = lon, y = lat, dx = u, dy = v),
+                    arrow.angle = 25, arrow.length = .4, arrow.type = "open")+
+  metR::scale_mag(max = .75, name = "Speed", labels = ".75 m/s")+
+    geom_sf(data = spData::world, fill = "grey60", col = "grey20")+
+  coord_sf(xlim = lonlim, ylim = latlim)+
+  # theme(legend.position = "none")+
+  labs(x = NULL, y = NULL)+
+  scale_fill_gradientn(name = "ssh (m)",colours = oce::oceColors9A(120), na.value = "white")+
+  scale_x_continuous(breaks = seq(-126,-116, length.out = 5) %>%round(1))+
+  scale_y_continuous(breaks = seq(32,40, 2))+
+  guides(fill = guide_colorbar(title = "Sea surface height (m)", 
+                               title.position = "right", title.theme = element_text(angle = 90), 
+                               barwidth = 1.25, barheight = 10, draw.ulim = 1.2, draw.llim = 0.6))+
+  theme_bw()+
+  theme(axis.text = element_text(colour = 1, size = 11))
+
+
+```

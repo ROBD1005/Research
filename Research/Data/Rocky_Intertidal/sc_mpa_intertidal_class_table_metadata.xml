@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<dataTable id="" scope="document">
+	<physical scope="document">
+		<objectName>sc_mpa_intertidal_class_table</objectName>
+	</physical>
+	<attributeList>
+		<attribute id="" scope="document">
+			<attributeName>SC_project_short_code</attributeName>
+			<attributeLabel>SC project short code</attributeLabel>
+			<attributeDefinition>The unique code for each baseline program project funded through the SC MPA Baseline Program. This code refers to a specific entry on the SC_MPA_BaselineProgramInformation_LookupTable. </attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any Text</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>final_classification_NameConvergence</attributeName>
+			<attributeLabel>final classification</attributeLabel>
+			<attributeDefinition>The unique name that references the taxonomic, functional, morphologic, or geologic concept being observed. This is the current name designation.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Name of the organism as identified on ITIS. In cases where substrate or other non taxonomic name is used, classification is determined by the survey team. Source:Integrated Taxonomic Information System (ITIS) http://www.itis.usda.gov </definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>preliminary_classification_OriginalName</attributeName>
+			<attributeLabel>original classification</attributeLabel>
+			<attributeDefinition>The name of the taxonomic, functional, morphologic, or geologic concept being observed, as it appears in the data taken from the field. This field documents if multiple organisms have been classified with the same name (lumped). This field also documents any name changes (synonyms). Degree of lumping may vary over time and is reflected in the associated final_classification_NameConvergence field.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Name of the organism as identified on ITIS. In cases where substrate or other non taxonomic name is used, classification is determined by the survey team. Source:Integrated Taxonomic Information System (ITIS) http://www.itis.usda.gov </definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>class_code</attributeName>
+			<attributeLabel>Biodiversity Survey class code</attributeLabel>
+			<attributeDefinition>Unique numeric lookup code that is referenced by the Biodiversity Survey observation tables.This is the code that should be used to determine the species observed in the Biodiversity Surveys. If this field is blank, this record refers to a species observed in the Long Term Monitoring Surveys. </attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any integer 1 to N</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>SixLetterCode</attributeName>
+			<attributeLabel>Long Term Monitoring Survey Species Code</attributeLabel>
+			<attributeDefinition>Unique alphabetic lookup code that is referenced by the Long Term Monitoring Survey observation tables. This is the code that should be used to determine the species observed in the Long Term Monitoring surveys. If this field is blank, this record refers to a species observed in the Biodiversity Surveys. </attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any text</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>kingdom</attributeName>
+			<attributeLabel>kingdom</attributeLabel>
+			<attributeDefinition>One of seven biological categories (such as Plantae or Animalia). This is the broadest resolution of phylogenic identification used in this table.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Taxonomic kingdom name. Source: Integrated Taxonomic Information System (ITIS) http://www.itis.usda.gov</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>phylum_division</attributeName>
+			<attributeLabel>phylum or division</attributeLabel>
+			<attributeDefinition>The major taxonomic group of animals (phylum) and plants (division); contains classes.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Taxonomic phylum or division name. Source: Integrated Taxonomic Information System (ITIS) http://www.itis.usda.gov</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>class</attributeName>
+			<attributeLabel>class</attributeLabel>
+			<attributeDefinition>A taxonomic group containing one or more orders.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Taxonomic class name. Source: Integrated Taxonomic Information System (ITIS) http://www.itis.usda.gov</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>order</attributeName>
+			<attributeLabel>order</attributeLabel>
+			<attributeDefinition>Taxonomic group containing one or more families.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Taxonomic order name. Source: Integrated Taxonomic Information System (ITIS) http://www.itis.usda.gov</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>family</attributeName>
+			<attributeLabel>family</attributeLabel>
+			<attributeDefinition>A taxonomic group containing one or more genera.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Taxonomic family name. Source: Integrated Taxonomic Information System (ITIS) http://www.itis.usda.gov</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>genus</attributeName>
+			<attributeLabel>genus</attributeLabel>
+			<attributeDefinition>Taxonomic group containing one or more species.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Taxonomic genus name. Source: Integrated Taxonomic Information System (ITIS) http://www.itis.usda.gov</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>species</attributeName>
+			<attributeLabel>species</attributeLabel>
+			<attributeDefinition>Taxonomic group whose members can interbreed. This is the most refined level of resolution for phylogenic identification used in this table.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Taxonomic species name. Source: Integrated Taxonomic Information System (ITIS) http://www.itis.usda.gov</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+	</attributeList>
+</dataTable>

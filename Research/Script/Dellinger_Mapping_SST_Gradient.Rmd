@@ -1,0 +1,366 @@
+---
+title: USING OPEN SOURCE DATA TO VISUALIZE BIOLOGICAL, CHEMICAL, AND PHYSICAL OCEANOGRAPHIC
+  PROCESSES
+author: "Robert Dellinger"
+date: "5/5/2022"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    theme: cerulean
+---
+
+```{r setup, include=TRUE, message = FALSE}
+knitr::opts_chunk$set(warning=FALSE, fig.algin="center")
+
+devtools::install_github("ropensci/rerddap")
+library(oce)
+library(ocedata)
+library(ncdf4)
+library(tidyverse)
+library(lubridate)
+library(tidync)
+library(dplyr)
+library(marmap)
+library(ggplot2)
+library(ggmap)
+library(gganimate)
+library(stringr)
+library(plotly)
+library(sf)
+library(spData)
+library(rerddap)
+library(raster)
+library(mapdata)
+
+```
+
+
+# Mapping with the OCE package
+
+# Read in Datasets
+
+The OCE package is a package written by Kelley and Richards (2018) and is focused on oceanographic mapping and plotting that meets publication quality standards. Here, we use the mapPlot() function to create maps using coastline data and visualize oceanographic processes. 
+
+# Downloading Data
+
+First we will read in data from the oce package using the data() function 
+
+```{r, Downloading Data}
+
+Coastline <- data("coastlineWorld") #coastline data
+Coastline_Medium <- data("coastlineWorldMedium") #medium-scale coastline data
+Coastline_Fine <- data("coastlineWorldFine") #fine-scale-scale coastline data
+Bathymetry <- as.topo(getNOAA.bathy(-180, 0, 0, 90)) #coordinates for bathymetry data from NOAA (Northern Hemisphere)
+
+```
+
+# Creating a Map
+
+Using the map from the oce package we will create a simple map function that can be rerun
+
+```{r, Creating a Map Function Using OCE, fig.cap="Map of California"}
+
+# setting the map limits
+par(mar=c(2, 2, 1, 1)) # margins
+lonlim = c(-126,-116) # longitude
+latlim = c(32,40) # latitude
+
+coastline.map <- function() { 
+  mapPlot(coastlineWorldFine, #using fine-scale data
+        projection="+proj=mill", #setting the projection type
+        col="grey", #setting colors,
+        longitudelim=lonlim, 
+        latitudelim=latlim,
+        lonlabels=TRUE,
+        latlabels=TRUE,
+        geographical=4,
+        clip=TRUE)
+}
+
+coastline.map()
+```
+
+
+# Creating a Map with Bathymetry
+
+We will now create a map that mimics the depth of the ocean floor using our previous map function. The provided color palettes in the package can be used to visualize oceanographic phenomena such as bathymetry. 
+
+
+```{r, fig.cap="Map of California with Bathymetry", warning=FALSE}
+
+# setting the map limits
+par(mar=c(2, 2, 1, 1)) # margins
+lonlim = c(-125,-116) # longitude
+latlim = c(33.5,39.5) # latitude
+
+#Creating a Map with Bathymetry
+#Place Map
+coastline.map()
+#Overlaying Bathymetry Data
+mapImage(Bathymetry, col=oceColorsGebco, breaks=seq(-6000, 0, 100))
+mapImage(Bathymetry, col=oceColorsGebco, breaks=seq(-6000, 0, 500), filledContour = TRUE)
+#Adding in Coastline
+mapPolygon(coastlineWorldFine, col = "darkolivegreen3", border = "black") 
+#Adding in Grid
+mapGrid(dlongitude=1, dlatitude=1, col="black", lty=3) 
+
+#Setting points on a map with names and the respective locations
+sites = data.frame(name = c("Leo Carrillo State Beach \n Malibu, CA", "Bodega Marine Lab \n Bodega Bay, CA"), 
+                      lon = c(-118.9279, -123.0481), #locations and their respective longitude and latitudes
+                      lat = c(34.0622, 38.3332)) 
+#Placing points on the map
+mapPoints(longitude = sites$lon, #placing points on map using longitude
+          latitude = sites$lat, #placing points on map using latitude
+          pch = 20, 
+          cex = 1.75)  #point size
+#Overlaying text
+mapText(longitude = sites$lon+1.5, #map text location long and lat
+        latitude = sites$lat+.75, 
+        labels = sites$name,
+        cex = 1.2, #font size
+        col="black") # changing font family
+
+```
+
+
+```{r, fig.cap="Map of CLeo Carillo Site with Bathymetry", warning=FALSE}
+
+# setting the map limits
+par(mar=c(2, 2, 1, 1)) # margins
+lonlim = c(-125,-116) # longitude
+latlim = c(33.5,34.5) # latitude
+
+#Creating a Map with Bathymetry
+#Place Map
+coastline.map()
+#Overlaying Bathymetry Data
+mapImage(Bathymetry, col=oceColorsGebco, breaks=seq(-6000, 0, 100))
+mapImage(Bathymetry, col=oceColorsGebco, breaks=seq(-6000, 0, 500), filledContour = TRUE)
+#Adding in Coastline
+mapPolygon(coastlineWorldFine, col = "darkolivegreen3", border = "black") 
+#Adding in Grid
+mapGrid(dlongitude=1, dlatitude=1, col="black", lty=3) 
+
+#Setting points on a map with names and the respective locations
+sites = data.frame(name = "Leo Carrillo State Beach \n Malibu, CA", 
+                      lon = (-118.9279), #locations and their respective longitude and latitudes
+                      lat = (34.0622)) 
+mapPoints(longitude = sites$lon, #placing points on map using longitude
+          latitude = sites$lat, #placing points on map using latitude
+          pch = 20, 
+          cex = 1.75)  #point size
+#Overlaying text
+mapText(longitude = sites$lon+.5, #map text location long and lat
+        latitude = sites$lat+.5, 
+        labels = sites$name,
+        cex = 1.2, #font size
+        col="black") # changing font family
+
+```
+
+
+```
+
+# Creating a Map with Overlayed SST Data
+
+We will now create a map that mimics that shows us the sea surface temperature of the ocean and use the provided temeprature color palette to visualize differences in ocean temperature. NOAA and NASA provide open source data for marine biology and oceanography data that can be used for creating visuals. For this portion we will use data downloaded from the Group for High Resolution Sea Surface Temperature (GHRSST) which has entire data sets of regional and global data linked here [https://www.ghrsst.org/]. The dataset is provided in a netcdf format so we will have to first read in the data using the nc_open function from the netcdf package (Pierce 2017) prior to graphing. 
+
+We will download sea surface temperature (SST) analysis data provided by NOAA which provides a combination of daily satellite and in situ temperature temperature measurements on a global level. We will use data from August 1, 2018, the day of the hottest observed SST by Scripps Institution of Oceanography since the previous record set in 1931. 
+
+# Reading in Open Source SST Data from NOAA and NASA 
+
+```{r, Downloading Data (NOAA/NASA)}
+
+# Opening downloaded data from NOAA 
+sst.data <- nc_open("/Users/robertdellinger/Documents/Research/Data/Temperature_Data/sst.08.01.18.nc")
+
+# extract the longitude variable
+sst.lon = ncvar_get(sst.data, "lon")
+# extract the latitude variable
+sst.lat = ncvar_get(sst.data, "lat")
+# extract sst variable
+sst = ncvar_get(sst.data, "analysed_sst")
+# extract time 
+
+# Kelvin to Degree celsius and calibrate
+sst = sst-273.149993896484
+
+```
+
+
+# Hottest Observed SST for the Southern California Region
+
+```{r, fig.cap="SST Map for Souththern California", warning=FALSE}
+
+# setting the map limits
+par(mar=c(2, 2, 1, 1)) # margins
+lonlim = c(-122.25,-116.25) # longitude
+latlim = c(32.25,35.25) # latitude
+templim = c(10,26) #temperature limits in celsisus
+
+# draw palette (must be done before plotting)
+drawPalette(zlim = templim, 
+            zlab = "Temperature (°C)",
+            col=oce.colorsJet, #using the oce package temperature colors
+            at = seq(10,26,1), 
+            pos = 1)
+
+#adding in sst to overlay the map function
+coastline.map()
+mapImage(longitude = sst.lon, latitude = sst.lat, z = sst, zlim = templim, col = oceColorsJet(120))
+mapImage(longitude = sst.lon, latitude = sst.lat, z = sst, zlim = templim, col = oceColorsJet(120), filledContour = TRUE)  #overlay sst & contour
+mapContour(longitude = sst.lon, latitude = sst.lat, z = sst, levels = seq(10,26,1),
+            col = "black", lty = 1, lwd = 1)
+mapPolygon(coastlineWorldFine, col="darkolivegreen3") # overlay green topography
+mapGrid(dlongitude=1, dlatitude=1, col="black", lty=3) # adding a map grid
+
+#Setting points on a map with names and the respective locations
+site = data.frame(name = c("Leo Carrillo State Beach \n Malibu, CA"), 
+                      lon = -118.9279, #locations and their respective longitude and latitudes
+                      lat = 34.0622)
+#Placing points on the map
+mapPoints(longitude = site$lon, #placing points on map using longitude
+          latitude = site$lat, #placing points on map using latitude
+          pch = 20, 
+          cex = 1.75)  #point size
+#Overlaying text
+mapText(longitude = site$lon+1.5, #map text location long and lat
+        latitude = site$lat+.75, 
+        labels = site$name,
+        cex = 1.2, #font size
+        col="black") # changing font family
+
+
+```
+
+# Hottest Observed SST for the Northern California Region
+
+```{r, fig.cap="SST Map for Northern California", warning=FALSE}
+
+# setting the map limits
+par(mar=c(2, 2, 1, 1)) # margins
+lonlim = c(-126.25,-120.25) # longitude
+latlim = c(37.25,40.25) # latitude 
+templim = c(10,26) #temperature limits in celsisus
+
+# draw palette (must be done before plotting)
+drawPalette(zlim = templim, 
+            zlab = "Temperature (°C)",
+            col=oce.colorsJet, #using the oce package temperature colors
+            at = seq(10,26,1), 
+            pos = 1)
+
+#adding in sst to overlay the map function
+coastline.map()
+mapImage(longitude = sst.lon, latitude = sst.lat, z = sst, zlim = templim, col = oceColorsJet(120))
+mapImage(longitude = sst.lon, latitude = sst.lat, z = sst, zlim = templim, col = oceColorsJet(120), filledContour = TRUE)  #overlay sst & contour
+mapContour(longitude = sst.lon, latitude = sst.lat, z = sst, levels = seq(10,26,1),
+            col = "black", lty = 1, lwd = 1)
+mapPolygon(coastlineWorldFine, col="darkolivegreen3") # overlay green topography
+mapGrid(dlongitude=1, dlatitude=1, col="black", lty=3) # adding a map grid
+
+
+#Setting points on a map with names and the respective locations
+site = data.frame(name = c("Bodega Marine Lab \n Bodega Bay, CA"), 
+                      lon = -123.0481, #locations and their respective longitude and latitudes
+                      lat = 38.3332) 
+#Placing points on the map
+mapPoints(longitude = site$lon, #placing points on map using longitude
+          latitude = site$lat, #placing points on map using latitude
+          pch = 20, 
+          cex = 1.75)  #point size
+#Overlaying text
+mapText(longitude = site$lon+1.5, #map text location long and lat
+        latitude = site$lat+.75, 
+        labels = site$name,
+        cex = 1.2, #font size
+        col="black") # changing font family
+
+
+```
+
+
+
+# Plotting Using NOAA ERDAPP Data 
+
+For this portion we will use NOAA servers to download monthly mean temperatures and visualize data using a boxplot. Data can either be downloaded by using the rerddap package or the NOAA online repository. We will clean the data by selecting for the year 2021 and then the longitudes and latitudes of the Southern California Region. Then, we will average SST per month and create an animated plot to visualize changes between months.
+
+[Data Linked Here](https://psl.noaa.gov/repository/entry/show?entryid=cac1c2a6-a864-4409-bb77-1fdead8eeb6e)
+
+Available ERDDAP data can also be pulled into R using the servers() function 
+
+# Data Wrangling
+
+```{r, Data Wrangling SST, warning=FALSE}
+
+sst.file <- tidync("/Users/robertdellinger/Documents/Research/Data/Temperature_Data/sst.mnmean.nc") 
+sst.tibble <- hyper_tibble(sst.file,  na.rm = FALSE) #turnning nc into tibble
+
+sst.data <- sst.tibble  %>%  
+  mutate(date=as.Date(time, origin="1800-1-1 00:00:00"),
+         day = day(date),  # save dates as intergers 
+         month = month(date) %>% as.integer(),
+         year = year(date) %>% as.integer(),
+         sst=as.numeric(sst)) %>%  #converting dates 
+  filter(date >= dmy(010121), date <= dmy(010122),
+         lat > 30, lat < 35, #lat limits
+         lon > 290, lon < 310,
+         year ==2021) %>% #lon limits
+  dplyr::select(date, month, lon, lat, sst)
+  
+sst.data = as.data.frame(sst.data) #convert to data frame
+
+# group sst based on longitude, latitude and month
+sst.month = sst.data %>% 
+  group_by(lon,lat,month) %>% # selected for lat, long, and month
+  summarise(sst = mean(sst, na.rm = TRUE))
+
+# ungroup grouped data frame
+sst.month = sst.data %>% ungroup()
+
+```
+
+# Creating an Animated Temperature Plot for the Southern California Region
+
+Here we use gganimate and ggplot2 to create a animated boxplot using mean temperature data for the Southern California Region. 
+
+
+```{r, fig.cap="Monthly Variation of Temperature in Southern California Boxplot"}
+
+animatedplot <- ggplot(data =sst.month, #ggplot sst monthly data
+       aes(x = month, y = sst, fill = as.factor(month)))+
+  geom_boxplot(show.legend = FALSE)+ #create boxplot
+  scale_fill_brewer(palette = "Paired")+
+  cowplot::theme_cowplot()+ 
+  scale_x_continuous(breaks = 1:12)+
+  ylab("Sea Surface Temperature (°C)")+  #add labels
+  xlab("Month") +
+  labs(title = "{closest_state}")+
+  transition_states(month, transition_length = 1, #transition time and month
+                    state_length = 0.5, wrap = TRUE) + #transition wrap
+  ease_aes('linear') +
+  shadow_mark()
+
+animatedplot
+
+```
+
+
+# References 
+
+Grolemund, G., & Wickham, H. (2011). Dates and times made easy with lubridate. Journal of Statistical Software, 40(3), 1–25. Retrieved from http://www.jstatsoft.org/v40/i03/
+
+Kelley, Dan. 2015. Ocedata: Oceanographic Datasets for Oce. https://CRAN.R-project.org/package=ocedata.
+
+Kelley, Dan, and Clark Richards. 2018. Oce: Analysis of Oceanographic Data. https://CRAN.R-project.org/package=oce.
+
+R Core Team. 2018. R: A Language and Environment for Statistical Computing. Vienna, Austria: R Foundation for Statistical Computing. https://www.R-project.org/.
+
+Richard W. Reynolds, Viva F. Banzon, and NOAA CDR Program (2008): NOAA Optimum Interpolation 1/4 Degree Daily Sea Surface Temperature (OISST) Analysis, Version 2. [indicate subset used]. NOAA National Centers for Environmental Information. http://doi.org/doi:10.7289/V5SQ8XB5 
+
+Pedersen, T. L., & Robinson, D. (2017). Gganimate: A grammar of animated graphics. Retrieved from http://github.com/thomasp85/gganimate
+
+Wickham, H. (2016). Ggplot2: Elegant graphics for data analysis. Springer-Verlag New York. Retrieved from http://ggplot2.org
+
+Pierce, David. 2017. Ncdf4: Interface to Unidata netCDF (Version 4 or Earlier) Format Data Files. https://CRAN.R-project.org/package=ncdf4.

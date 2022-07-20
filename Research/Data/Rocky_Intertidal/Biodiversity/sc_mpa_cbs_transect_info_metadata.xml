@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<dataTable id="" scope="document">
+	<physical scope="document">
+		<objectName>sc_mpa_cbs_transect_info</objectName>
+	</physical>
+	<attributeList>
+		<attribute id="" scope="document">
+			<attributeName>SC_project_short_code</attributeName>
+			<attributeLabel>SC project short code</attributeLabel>
+			<attributeDefinition>The unique code for each baseline program project funded through the SC MPA Baseline Program. This code refers to a specific entry on the SC_MPA_BaselineProgramInformation_LookupTable. </attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any text</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>cbsSiteCode</attributeName>
+			<attributeLabel>Biodiversity Site Code</attributeLabel>
+			<attributeDefinition>Unique site code that indicates where the Biodiversity survey was done. this site code refers to a specific entry on the sc_mpa_intertidal_site_table.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any integer 1 to N</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>survey_rep</attributeName>
+			<attributeLabel>survey repetition</attributeLabel>
+			<attributeDefinition>A number representing the succession of surveys conducted at a site. A number '1' represents the first time a site was sampled, a '2' represents the second time it was sampled, and so on. True date of sampling is defined in the observation table for each method.</attributeDefinition>
+			<measurementScale>
+				<interval>
+					<unit>
+						<standardUnit>dimensionless</standardUnit>
+					</unit>
+					<precision>1</precision>
+					<numericDomain>
+						<numberType></numberType>
+					</numericDomain>
+				</interval>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>section</attributeName>
+			<attributeLabel>section</attributeLabel>
+			<attributeDefinition>A number describing a site as a contiguous or divided survey area. Divisions are referred to as sections. A site will be divided when there is not enough space on the intertidal bench for a 30-meter wide baseline. Therefore, the 2 sections together will make up the survey area for the site. </attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<enumeratedDomain enforced="yes">
+							<codeDefinition>
+								<code>1</code>
+								<definition>Right hand (upcoast) side when facing the ocean from the land. This is the only value for sites with a single section, indicating no division at the site</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code>2</code>
+								<definition>Left hand (downcoast) side when facing the ocean from the land</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code></code>
+								<definition></definition>
+							</codeDefinition>
+						</enumeratedDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>transect</attributeName>
+			<attributeLabel>transect</attributeLabel>
+			<attributeDefinition>A number representing one of the parallel meter tapes (transects) within the survey area. Transects stem from a baseline, which is established along shore in the high zone of a site area. The transect number is determined by the meter mark on the baseline from where the transect begins.</attributeDefinition>
+			<measurementScale>
+				<interval>
+					<unit>
+						<standardUnit>meter</standardUnit>
+					</unit>
+					<precision>0.1</precision>
+					<numericDomain>
+						<numberType></numberType>
+					</numericDomain>
+				</interval>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>interval_m</attributeName>
+			<attributeLabel>sampling interval</attributeLabel>
+			<attributeDefinition>The interval between the points sampled during the Biodiversity Point Contact Surveys. Generally, 100 points are sampled on each transect line, so the interval for each site is based on 1/100 the length of the intertidal area. </attributeDefinition>
+			<measurementScale>
+				<interval>
+					<unit>
+						<standardUnit></standardUnit>
+					</unit>
+					<precision></precision>
+					<numericDomain>
+						<numberType></numberType>
+					</numericDomain>
+				</interval>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>angle</attributeName>
+			<attributeLabel>angle</attributeLabel>
+			<attributeDefinition>The angle of the referenced transect. This angle is the compass heading observed when standing at the top of the transect line (landward) and looking towards the bottom of the line (seaward).This angle can be used to determine the coastal orientation of the site, but does not take into account swell and offshore features.</attributeDefinition>
+			<measurementScale>
+				<ratio>
+					<unit>
+						<standardUnit>degree</standardUnit>
+					</unit>
+					<precision>1</precision>
+					<numericDomain>
+						<numberType></numberType>
+					</numericDomain>
+				</ratio>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>line_length_m</attributeName>
+			<attributeLabel>length of point contact transect lines in meters</attributeLabel>
+			<attributeDefinition>The length of the transect line sampled during the Biodiversity Point Contact Surveys. The length of the line indicates the width (from land to sea) of the intertidal area sampled on this transect.</attributeDefinition>
+			<measurementScale>
+				<interval>
+					<unit>
+						<standardUnit>meter</standardUnit>
+					</unit>
+					<precision>0.1</precision>
+					<numericDomain>
+						<numberType></numberType>
+					</numericDomain>
+				</interval>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName></attributeName>
+			<attributeLabel></attributeLabel>
+			<attributeDefinition></attributeDefinition>
+			<measurementScale>			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName></attributeName>
+			<attributeLabel></attributeLabel>
+			<attributeDefinition></attributeDefinition>
+			<measurementScale>			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName></attributeName>
+			<attributeLabel></attributeLabel>
+			<attributeDefinition></attributeDefinition>
+			<measurementScale>			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName></attributeName>
+			<attributeLabel></attributeLabel>
+			<attributeDefinition></attributeDefinition>
+			<measurementScale>			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName></attributeName>
+			<attributeLabel></attributeLabel>
+			<attributeDefinition></attributeDefinition>
+			<measurementScale>			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName></attributeName>
+			<attributeLabel></attributeLabel>
+			<attributeDefinition></attributeDefinition>
+			<measurementScale>			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName></attributeName>
+			<attributeLabel></attributeLabel>
+			<attributeDefinition></attributeDefinition>
+			<measurementScale>			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName></attributeName>
+			<attributeLabel></attributeLabel>
+			<attributeDefinition></attributeDefinition>
+			<measurementScale>			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName></attributeName>
+			<attributeLabel></attributeLabel>
+			<attributeDefinition></attributeDefinition>
+			<measurementScale>			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName></attributeName>
+			<attributeLabel></attributeLabel>
+			<attributeDefinition></attributeDefinition>
+			<measurementScale>			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName></attributeName>
+			<attributeLabel></attributeLabel>
+			<attributeDefinition></attributeDefinition>
+			<measurementScale>			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName></attributeName>
+			<attributeLabel></attributeLabel>
+			<attributeDefinition></attributeDefinition>
+			<measurementScale>			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName></attributeName>
+			<attributeLabel></attributeLabel>
+			<attributeDefinition></attributeDefinition>
+			<measurementScale>			</measurementScale>
+		</attribute>
+	</attributeList>
+</dataTable>

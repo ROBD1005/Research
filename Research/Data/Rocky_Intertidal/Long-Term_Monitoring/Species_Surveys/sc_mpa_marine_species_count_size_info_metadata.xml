@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<dataTable id="" scope="document">
+	<physical scope="document">
+		<objectName>sc_mpa_MARINe_species_counts_size_info</objectName>
+	</physical>
+	<attributeList>
+		<attribute id="" scope="document">
+			<attributeName>SC_project_short_code</attributeName>
+			<attributeLabel>SC project short code</attributeLabel>
+			<attributeDefinition>The unique code for each baseline program project funded through the SC MPA Baseline Program. This code refers to a specific entry on the SC_MPA_BaselineProgramInformation_LookupTable. </attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any text</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>SiteID</attributeName>
+			<attributeLabel>Long-Term Monitoring site code</attributeLabel>
+			<attributeDefinition>The unique letter code that indicates where the plot is located. This ID refers to a specific entry in the site table.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any text</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>TargetSpecies</attributeName>
+			<attributeLabel>Target Species</attributeLabel>
+			<attributeDefinition>The specific organism that this plot was created to monitor.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Name of the organism as identified on the Integrated Taxonomic Information System (ITIS, http://www.itis.usda.gov). In cases where substrate or other non taxonomic name is used, classification determined by the survey team.</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>PlotID</attributeName>
+			<attributeLabel>Plot Number</attributeLabel>
+			<attributeDefinition>Replicate plot number, starting from 1.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<textDomain>
+							<definition>Any integer from 1 to N</definition>
+						</textDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>MethodCode</attributeName>
+			<attributeLabel>Method</attributeLabel>
+			<attributeDefinition>The method used for sampling the plot.</attributeDefinition>
+			<measurementScale>
+				<nominal>
+					<nonNumericDomain>
+						<enumeratedDomain enforced="yes">
+							<codeDefinition>
+								<code>BT215</code>
+								<definition>Band Transect 2m x 15m</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code>BT25</code>
+								<definition>Band Transect 2m x 5m</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code>CP1</code>
+								<definition>Circular Plot - 1 meter radius</definition>
+							</codeDefinition>
+							<codeDefinition>
+								<code>IP</code>
+								<definition>Irregular Plot</definition>
+							</codeDefinition>
+								<codeDefinition>
+								<code>BT</code>
+								<definition>Band Transect</definition>
+							</codeDefinition>
+								<codeDefinition>
+								<code>CP15</code>
+								<definition>Circular Plot - 1.5 meter radius</definition>
+							</codeDefinition>
+								<codeDefinition>
+								<code>GSES</code>
+								<definition>General search entire site</definition>
+							</codeDefinition>
+								<codeDefinition>
+								<code>RA</code>
+								<definition>Random Area Search</definition>
+							</codeDefinition>
+								<codeDefinition>
+								<code>RC</code>
+								<definition>RandomCount</definition>
+							</codeDefinition>
+								<codeDefinition>
+								<code>TS30</code>
+								<definition>Timed Search 30 Minute</definition>
+							</codeDefinition>
+						</enumeratedDomain>
+					</nonNumericDomain>
+				</nominal>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>YearEst</attributeName>
+			<attributeLabel>Year Established</attributeLabel>
+			<attributeDefinition>The year this plot configuration was established. This year is expressed in YYYY format. Dates reflect measurements taken in local time. Local time is Pacific Standard Time except during months when Pacific Daylight Time is effective.</attributeDefinition>
+			<measurementScale>
+				<datetime>
+					<formatString>YYYY</formatString>
+					<dateTimePrecision>1 year</dateTimePrecision>
+				</datetime>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>MonthEst</attributeName>
+			<attributeLabel>Month Established</attributeLabel>
+			<attributeDefinition>The month this plot configuration was established. This month is expressed in M or MM format. Dates reflect measurements taken in local time. Local time is Pacific Standard Time except during months when Pacific Daylight Time is effective.</attributeDefinition>
+			<measurementScale>
+				<datetime>
+					<formatString>MM</formatString>
+					<dateTimePrecision>1 month</dateTimePrecision>
+				</datetime>
+			</measurementScale>
+		</attribute>
+		<attribute id="" scope="document">
+			<attributeName>DayEst</attributeName>
+			<attributeLabel>Day Established</attributeLabel>
+			<attributeDefinition>The day of the month this plot configuration was established. This date is expressed in D or DD format. Dates reflect measurements taken in local time. Local time is Pacific Standard Time except during months when Pacific Daylight Time is effective.</attributeDefinition>
+			<measurementScale>
+				<datetime>
+					<formatString>DD</formatString>
+					<dateTimePrecision>1 day</dateTimePrecision>
+				</datetime>
+			</measurementScale>
+		</attribute>
+	</attributeList>
+</dataTable>

@@ -1,0 +1,91 @@
+---
+title: "Time Series"
+author: "Robert Dellinger"
+date: "5/16/2022"
+output: html_document
+---
+
+# Install Packages 
+
+```{r setup, include=TRUE, message = FALSE}
+knitr::opts_chunk$set(warning=FALSE, fig.algin="center")
+
+library(lubridate)
+library(tidyverse)
+library(xtractomatic)
+library(rerddap)
+library(oce)
+library(ocedata)
+library(ncdf4)
+library(lubridate)
+library(tidync)
+library(dplyr)
+library(ggplot2)
+library(raster)
+
+
+```
+
+# Visualizing Time Series Data
+
+Data was downloaded from NOAA Environmental Research Division Data Access Program (EDRAPP) at a Southern California Coastal Ocean Observation Station (SCCOOS) linked here [https://sccoos.org/]. Data was downloaded from the station at the Santa Monica Pier. This data provides us with the SST measurements taken at frequent intervals for the nearshore coastal ocean of the Los Angeles region. 
+
+Below we read in the packages using the nc_open() functionand extract time and SST variables from the data set
+
+# Load in Data
+
+```{r, Downloading Data (SCOSS) }
+
+sccoss.data <- read_csv("/Users/robertdellinger/Documents/Research/Data/Temperature_Data/sccoss.santamonica.sst.2012.2022.csv")
+
+names(sccoss.data) <- c("datetime","SST")
+
+```
+
+# Data Wrangling 
+
+```{r, Data Wrangling SCOSS, warning= FALSE}
+
+#clean the data
+sccoss.data.clean  <- sccoss.data[-1,] %>% #remove first column
+  mutate(datetime = str_remove(datetime, "Z"), #remove z from string
+         date = as.Date(ymd(str_split_fixed(datetime, "T", n=Inf)[,1])), #split string into date
+         time= str_split_fixed(datetime, "T", n=Inf)[,2], #split string into time
+         SST = as.numeric(SST)) %>% #change sst to a numeric value
+  filter(SST>10,
+         SST<30) %>%
+  dplyr::select("date", "SST") 
+
+sccoss.summary <- sccoss.data.clean %>% 
+  group_by(date)%>% # group date
+  summarise(SST.mean = mean(SST, na.rm=TRUE), #calculate mean
+            SST.sd = sd(SST, na.rm=TRUE),
+            SST.min = min(SST, na.rm=TRUE),
+            SST.max = max(SST, na.rm=TRUE))
+
+sccoss.dataset <- full_join(sccoss.data.clean, sccoss.summary, by="date") #join data sets
+
+sccoss.timeseries <- sccoss.dataset %>% 
+  filter(date < ymd("2022-01-01"), #filter years
+         date > ymd("2019-01-01"))
+
+```
+
+#Plotting Time Series Temperature Data
+
+```{r, fig.cap="Sea Surface Temperature Time Series for Los Angeles"}
+
+# make the plot and add labels
+sst.plot <- ggplot(sccoss.timeseries, aes(x=date, y=SST.mean)) + #date by mean sst
+  geom_line(aes(x=date, y=SST.mean), color="darkcyan", alpha=0.5) +
+  geom_smooth(span=0.25, se=FALSE, color="darkcyan") +
+  geom_ribbon(aes(ymin=SST.min, ymax=SST.max), fill="darkcyan", alpha=0.1)+
+  ylab("Sea Surface Temperature (°C)") +  #add labels
+  xlab("Date") +
+labs(title = "Mean Sea Surface Temperature in Los Angeles, CA", subtitle = "Maximum, Minimum, & Mean SST Between 2019 & 2022 
+(Data: Southern California Coastal Ocean Observation Station, Santa Monica Pier)") +
+  theme_bw(base_size = 9) #
+
+sst.plot
+
+```

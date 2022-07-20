@@ -1,0 +1,217 @@
+---
+title: "Mesocosm Temperature"
+author: "Robert Dellinger"
+date: "7/13/2022"
+output: html_document
+---
+
+#Load Library
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(tidymodels)
+library(here)
+library(lubridate)
+library(ggplot2)
+
+
+```
+
+# Data Wrangling
+
+```{r, warning=FALSE, echo=FALSE}
+
+files <- list.files("/Users/robertdellinger/Documents/Research/Research/Data/Experiment_Data/Mesocosm_Tank_Temperatures/Tanks", pattern = ".csv", full.names = TRUE) %>% 
+  sort(decreasing = TRUE) #files ordered by decreasing values
+
+temp.data <- files %>%  # read csv files into one data frame
+  map_dfr(~ read_csv(.x, skip=3, col_names = c("Date", "Temp")), #skip first rows of metadata and rename columns
+          .id="File_Number") %>%  #labeling the File ID
+  mutate(Tank_ID = case_when(File_Number==1 ~ "TNK_9", 
+                                             File_Number==2 ~ "TNK_8",
+                                             File_Number==3 ~ "TNK_7",
+                                             File_Number==4 ~ "TNK_6",
+                                             File_Number==5 ~ "TNK_5",
+                                             File_Number==6 ~ "TNK_4",
+                                             File_Number==7 ~ "TNK_3",
+                                             File_Number==8 ~ "TNK_2",
+                                             File_Number==9 ~ "TNK_18",
+                                             File_Number==10 ~ "TNK_16",
+                                             File_Number==11 ~ "TNK_15",
+                                             File_Number==12 ~ "TNK_14",
+                                             File_Number==13 ~ "TNK_13",
+                                             File_Number==14 ~ "TNK_12",
+                                             File_Number==15 ~ "TNK_11",
+                                             File_Number==16 ~ "TNK_10"), 
+  Tank_Treatment = case_when(Tank_ID=="TNK_9" ~ 12, #Relabeling tanks 
+                                             Tank_ID=="TNK_8" ~ 26,
+                                             Tank_ID=="TNK_7" ~ 24,
+                                             Tank_ID=="TNK_6" ~ 22,
+                                             Tank_ID=="TNK_5" ~ 20,
+                                             Tank_ID=="TNK_4" ~ 18,
+                                             Tank_ID=="TNK_3" ~ 16,
+                                             Tank_ID=="TNK_2" ~ 14,
+                                             Tank_ID=="TNK_18" ~ 12,
+                                             Tank_ID=="TNK_16" ~ 26,
+                                             Tank_ID=="TNK_15" ~ 24,
+                                             Tank_ID=="TNK_14" ~ 22,
+                                             Tank_ID=="TNK_13" ~ 20,
+                                             Tank_ID=="TNK_12" ~ 18,
+                                             Tank_ID=="TNK_11" ~ 16,
+                                             Tank_ID=="TNK_10" ~ 14)) %>% 
+  select(Tank_ID, Date, Temp, Tank_Treatment) #selecting for the file number, date and temperature data
+
+
+```
+
+
+```{r}
+
+#cleaning and filtering data
+temp.clean <- temp.data %>% 
+  mutate(Time = hms(format(Date, format = "%H:%M:%S")) )%>% #create time column 
+  mutate(Tide = ifelse(Time > hms("12:00:00") & Time < hms("18:00:00") | Time > hms("00:00:00") & Time < hms("06:00:00"), "Low","High")) %>% #tide column
+  filter(Date >= "2022-07-18",
+         Date <= "2022-07-19") %>% 
+    group_by(Tank_ID) %>% 
+  na.omit()
+
+#selecting temperatures for temperature at low tide (air temperature)
+air.temperature <- temp.clean %>%
+  filter(Time > hms("13:00:00") & Time < hms("17:00:00") | Time > hms("01:00:00") & Time < hms("05:00:00"))
+
+#air temperature summary statistics 
+air.temperature.summary <- air.temperature %>% 
+  group_by(Tank_ID) %>% 
+  summarise(mean.temp=mean(Temp, na.rm=TRUE),
+            min.temp=min(Temp, na.rm=TRUE),
+            sd.temp=sd(Temp, na.rm=TRUE),
+            max.temp=max(Temp, na.rm=TRUE))
+
+
+#selecting temperatures for temperature at high tide (water temperature)
+water.temperature <- temp.clean %>%
+  filter(Time > hms("07:00:00") & Time < hms("11:00:00") | Time > hms("19:00:00") & Time < hms("23:00:00"))
+
+#air temperature summary statistics 
+water.temperature.summary <- water.temperature %>% 
+  group_by(Tank_ID) %>% 
+  summarise(mean.temp=mean(Temp, na.rm=TRUE),
+            min.temp=min(Temp, na.rm=TRUE),
+            sd.temp=sd(Temp, na.rm=TRUE),
+            max.temp=max(Temp, na.rm=TRUE))
+
+```
+
+
+#Facetwrap Tank Plots (High versus Low Tide)
+
+```{r}
+
+temp.plot <- ggplot(temp.clean, aes(y=Temp, x=Date))+
+  geom_point(aes(color = Tide), na.rm=TRUE)+
+  geom_hline(aes(yintercept = Tank_Treatment))+
+  facet_wrap(~Tank_ID)+
+  scale_color_discrete(name="Tank")+
+  theme_bw()+
+  theme(text=element_text(family="Helvetica", size = 5, color = 'black'),
+        legend.title = element_text(size=10))+
+    scale_y_continuous(breaks = c(12,14,16,18,20,22,24,26))+
+  labs(title="Mesocosm Temperature Range")+
+  xlab("Date")+
+  ylab("Temperature (°C)")
+
+temp.plot
+
+ggsave(plot = temp.plot, width = 10, height = 10, dpi = 300, filename = "temp.plot.png")
+
+
+
+```
+# Air Temperature Box Plots
+
+```{r}
+
+
+
+air.temperature.plot <- ggplot(water.temperature, aes(y=Temp, x = ""))+
+  geom_boxplot()+
+  facet_wrap(~Tank_ID)+
+  theme_bw()+
+  theme(text=element_text(family="Helvetica", size = 5, color = 'black'),
+        legend.title = element_text(size=10))+
+    scale_y_continuous(breaks = c(12,14,16,18,20,22,24,26))+
+  labs(title="Mesocosm Temperature Range")+
+  xlab("Date")+
+  ylab("Temperature (°C)")
+
+air.temperature.plot
+
+
+
+#plot the steps with temperature and see if theres any pattern 
+        # a line 
+```
+
+#Data Download
+
+```{r}
+
+sump.data <- read_csv("/Users/robertdellinger/Documents/Research/Research/Data/Experiment_Data/Mesocosm_Tank_Temperatures/Air_And_Sump/TNK-SMP-SN20569984.csv", skip=3, col_names = c("Date", "Temp"))
+
+air.data <- read_csv("/Users/robertdellinger/Documents/Research/Research/Data/Experiment_Data/Mesocosm_Tank_Temperatures/Air_And_Sump/AIR-SN20565251.csv", skip=3, col_names = c("Date", "Temp"))
+
+```
+
+# Data Wrangling
+
+```{r}
+
+sump.data.clean <- sump.data %>% 
+  select(Date, Temp) %>% 
+  filter(Date >= "2022-07-16",
+         Date <= "2022-07-19") %>% 
+  na.omit()
+
+air.data.clean <- air.data %>% 
+  select(Date, Temp) %>% 
+  filter(Date >= "2022-07-16",
+         Date <= "2022-07-19") %>% 
+  na.omit()
+
+```
+
+#Plots for Air and Sump Temperature
+
+```{r}
+
+
+air.plot <- ggplot(air.data.clean, aes(y=Temp, x=Date))+
+  geom_line()+
+  theme_bw()+
+  theme(text=element_text(family="Helvetica", size = 5, color = 'black'),
+        legend.title = element_text(size=10))+
+  labs(title="Sump Temperature Variability")+
+  xlab("Date")+
+  ylab("Temperature (°C)")
+
+sump.plot <- ggplot(sump.data.clean, aes(y=Temp, x=Date))+
+geom_line()+
+  theme_bw()+
+  theme(text=element_text(family="Helvetica", size = 5, color = 'black'),
+        legend.title = element_text(size=10))+
+  labs(title="Air Temperature Variability")+
+  xlab("Date")+
+  ylab("Temperature (°C)")
+
+air.plot
+sump.plot
+
+ggsave(plot = air.plot, width = 15, height = 10, dpi = 500, filename = "temp.plot.png")
+ggsave(plot = sump.plot, width = 15, height = 10, dpi = 500, filename = "temp.plot.png")
+
+
+```
+
