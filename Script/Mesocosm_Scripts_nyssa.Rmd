@@ -11,12 +11,10 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
-library(tidymodels)
 library(here)
 library(lubridate)
 library(ggplot2)
 library(stringr)
-
 
 ```
 
@@ -24,68 +22,126 @@ library(stringr)
 
 ```{r, warning=FALSE, echo=FALSE}
 
-files <- list.files(here("Data","Experiment_Data","Mesocosm_Tank_Temperatures","Tanks"), pattern = ".csv", full.names = TRUE) %>% 
+files <- list.files(here("Data","Experiment_Data","Mesocosm_Tank_Temperatures"), pattern = ".csv", full.names = TRUE) %>% 
   sort(decreasing = TRUE) #files ordered by decreasing values
 
 temp.data <- files %>%  # read csv files into one data frame
   set_names()%>% #set names of file as column
-  map_dfr(~ read_csv(.x, skip=4, col_names = c("Date", "Temp"), col_types = list(col_character(), col_double())), #skip metadata
-          .id="filename") %>%
-  mutate(Tank_ID= str_extract(filename, pattern = regex("TNK-[0-9]"| "TNK-[A-Z]")), #string extract from file name
+  map_dfr(~ read_csv(.x, skip=4, col_names = c("Date", "Temp"), col_types = list(col_character(), col_double())), 
+          .id="filename") %>% #skip metadata
+  mutate(Tank_ID= str_extract(filename, pattern = regex("TNK-[0-9]+|TNK-[A-Z]{3}")), #string extract from file name
          Tank_ID= str_replace(Tank_ID, pattern="-", replacement="_"), #replace pattern 
          Date=ymd_hms(Date), #change to date format
          Time = hms(format(Date, format = "%H:%M:%S"))) %>%  #separate date and time columns 
-  select(Tank_ID, Date, Temp) #selecting columns 
+  select(Tank_ID, Date, Time, Temp) #selecting columns 
   
+metadata <- read_csv(here("Data", "Experiment_Data", "Metadata", "mesocosmmetadata.csv"))
 
 ```
 
+#Cleaning Data and Merging Metadata
 
 ```{r}
 
 #cleaning and filtering data
 temp.clean <- temp.data %>% 
   mutate(Tide = ifelse(Time > hms("12:00:00") & Time < hms("18:00:00") | Time > hms("00:00:00") & Time < hms("06:00:00"), "Low","High")) %>% #tide column
-  filter(Date >= "2022-07-18",
-         Date <= "2022-07-19") %>% 
+  filter(Date >= "2022-07-19",
+         Date <= "2022-07-20") %>% 
     group_by(Tank_ID) %>% 
-  na.omit()
-
-#selecting temperatures for temperature at low tide (air temperature)
-air.temperature <- temp.clean %>%
-  filter(Time > hms("13:00:00") & Time < hms("17:00:00") | Time > hms("01:00:00") & Time < hms("05:00:00"))
-
-#air temperature summary statistics 
-air.temperature.summary <- air.temperature %>% 
-  group_by(Tank_ID) %>% 
-  summarise(mean.temp=mean(Temp, na.rm=TRUE),
-            min.temp=min(Temp, na.rm=TRUE),
-            sd.temp=sd(Temp, na.rm=TRUE),
-            max.temp=max(Temp, na.rm=TRUE))
-
-
-#selecting temperatures for temperature at high tide (water temperature)
-water.temperature <- temp.clean %>%
-  filter(Time > hms("07:00:00") & Time < hms("11:00:00") | Time > hms("19:00:00") & Time < hms("23:00:00"))
-
-#water temperature summary statistics 
-water.temperature.summary <- water.temperature %>% 
-  group_by(Tank_ID) %>% 
-  summarise(mean.temp=mean(Temp, na.rm=TRUE),
-            min.temp=min(Temp, na.rm=TRUE),
-            sd.temp=sd(Temp, na.rm=TRUE),
-            max.temp=max(Temp, na.rm=TRUE))
+  na.omit() %>% 
+  left_join(metadata)
 
 ```
 
+#Air Temperature
+
+```{r}
+
+#selecting temperatures for temperature at low tide (air temperature)
+air.temperature <- temp.clean %>% #select times for air exposure
+  filter(Time > hms("13:00:00") & Time < hms("17:00:00") | Time > hms("01:00:00") & Time < hms("05:00:00")) %>%
+  mutate(Temp_diff = Temp-TempTreatment) #creating a column for difference between set and recorded temperatures
+
+#air temperature summary statistics 
+air.temperature.summary <- air.temperature %>% 
+  group_by(Tank_ID, TempTreatment,Heater_watts,Top_Bottom, StepAC, StepDoor) %>% 
+  summarise(mean.temp=mean(Temp, na.rm=TRUE),
+            min.temp=min(Temp, na.rm=TRUE),
+            sd.temp=sd(Temp, na.rm=TRUE),
+            max.temp=max(Temp, na.rm=TRUE))%>%
+  ungroup()
+
+
+```
+
+#Air Temperature Difference Plot
+
+```{r}
+
+ air.temperature.difference.plot <- air.temperature %>%
+  ggplot(aes(x = factor(StepAC), y = Temp_diff, color = Top_Bottom) ) +
+  geom_boxplot()+
+ geom_label(data = air.temperature.summary, aes(x = factor(StepAC), y = mean.temp, label = Tank_ID))+
+  theme_bw()+
+  theme(text=element_text(family="sans", size = 8, color = 'black'),
+        legend.title = element_text(size=10))+
+  labs(title="Difference Between Set and Recorded Air Temperature")+
+  xlab("Step from AC")+
+  ylab("Temperature Difference (°C)")
+
+ air.temperature.difference.plot 
+ 
+ ggsave(plot =  air.temperature.difference.plot, width = 15, height = 10, dpi = 500, filename = "air.temp.difference.plot.png")
+
+```
+
+#Water Temperature
+
+```{r}
+
+#selecting temperatures for temperature at high tide (water temperature)
+water.temperature <- temp.clean %>% #select times for water submergence
+  filter(Time > hms("07:00:00") & Time < hms("11:00:00") | Time > hms("19:00:00") & Time < hms("23:00:00")) %>%
+  mutate(Temp_diff = Temp-TempTreatment) #creating a column for difference between set and recorded temperatures
+
+#water temperature summary statistics 
+water.temperature.summary <- water.temperature %>% 
+ group_by(Tank_ID, TempTreatment,Heater_watts,Top_Bottom, StepAC, StepDoor) %>% 
+  summarise(mean.temp=mean(Temp, na.rm=TRUE), 
+            min.temp=min(Temp, na.rm=TRUE),
+            sd.temp=sd(Temp, na.rm=TRUE),
+            max.temp=max(Temp, na.rm=TRUE)) %>%
+  ungroup()
+
+```
+
+#Water Temperature Difference Plot
+
+```{r}
+
+water.temperature.difference.plot <- water.temperature %>%
+  ggplot(aes(x = TempTreatment, group = Tank_ID, y = Temp_diff, color = Heater_watts)) +
+  geom_boxplot()+
+  theme_bw()+
+  theme(text=element_text(family="sans", size = 8, color = 'black'),
+        legend.title = element_text(size=10))+
+  labs(title="Difference Between Set and Recorded Water Temperature")+
+  xlab("Tank ID")+
+  ylab("Temperature Difference (°C)")
+
+ water.temperature.difference.plot 
+
+ ggsave(plot = water.temperature.difference.plot, width = 15, height = 10, dpi = 500, filename = "water.temperature.difference.plot.png")
+```
 
 #Facetwrap Tank Plots (High versus Low Tide)
 
 ```{r}
 
-temp.plot <- ggplot(temp.clean, aes(y=Temp, x=Date))+
+mesocosm.temp.plot <- ggplot(temp.clean, aes(y=Temp, x=Date))+
   geom_point(aes(color = Tide), na.rm=TRUE)+
-  geom_hline(aes(yintercept = Tank_Treatment))+
+  geom_hline(aes(yintercept = TempTreatment))+
   facet_wrap(~Tank_ID)+
   scale_color_discrete(name="Tank")+
   theme_bw()+
@@ -96,95 +152,10 @@ temp.plot <- ggplot(temp.clean, aes(y=Temp, x=Date))+
   xlab("Date")+
   ylab("Temperature (°C)")
 
-temp.plot
+mesocosm.temp.plot
 
-ggsave(plot = temp.plot, width = 10, height = 10, dpi = 300, filename = "temp.plot.png")
+ggsave(plot = mesocosm.temp.plot, width = 10, height = 10, dpi = 300, filename = "mesocosm.temp.plot.png")
 
 
 
 ```
-# Air Temperature Box Plots
-
-```{r}
-
-
-
-air.temperature.plot <- ggplot(water.temperature, aes(y=Temp, x = ""))+
-  geom_boxplot()+
-  facet_wrap(~Tank_ID)+
-  theme_bw()+
-  theme(text=element_text(family="Helvetica", size = 5, color = 'black'),
-        legend.title = element_text(size=10))+
-    scale_y_continuous(breaks = c(12,14,16,18,20,22,24,26))+
-  labs(title="Mesocosm Temperature Range")+
-  xlab("Date")+
-  ylab("Temperature (°C)")
-
-air.temperature.plot
-
-
-
-#plot the steps with temperature and see if theres any pattern 
-        # a line 
-```
-
-#Data Download
-
-```{r}
-
-sump.data <- read_csv("/Users/robertdellinger/Documents/Research/Data/Experiment_Data/Mesocosm_Tank_Temperatures/Air_And_Sump/TNK-SMP-SN20569984.csv", skip=3, col_names = c("Date", "Temp"))
-
-air.data <- read_csv("/Users/robertdellinger/Documents/Research/Data/Experiment_Data/Mesocosm_Tank_Temperatures/Air_And_Sump/AIR-SN20565251.csv", skip=3, col_names = c("Date", "Temp"))
-
-```
-
-# Data Wrangling
-
-```{r}
-
-sump.data.clean <- sump.data %>% 
-  select(Date, Temp) %>% 
-  filter(Date >= "2022-07-16",
-         Date <= "2022-07-19") %>% 
-  na.omit()
-
-air.data.clean <- air.data %>% 
-  select(Date, Temp) %>% 
-  filter(Date >= "2022-07-16",
-         Date <= "2022-07-19") %>% 
-  na.omit()
-
-```
-
-#Plots for Air and Sump Temperature
-
-```{r}
-
-
-air.plot <- ggplot(air.data.clean, aes(y=Temp, x=Date))+
-  geom_line()+
-  theme_bw()+
-  theme(text=element_text(family="Helvetica", size = 5, color = 'black'),
-        legend.title = element_text(size=10))+
-  labs(title="Sump Temperature Variability")+
-  xlab("Date")+
-  ylab("Temperature (°C)")
-
-sump.plot <- ggplot(sump.data.clean, aes(y=Temp, x=Date))+
-geom_line()+
-  theme_bw()+
-  theme(text=element_text(family="Helvetica", size = 5, color = 'black'),
-        legend.title = element_text(size=10))+
-  labs(title="Air Temperature Variability")+
-  xlab("Date")+
-  ylab("Temperature (°C)")
-
-air.plot
-sump.plot
-
-ggsave(plot = air.plot, width = 15, height = 10, dpi = 500, filename = "temp.plot.png")
-ggsave(plot = sump.plot, width = 15, height = 10, dpi = 500, filename = "temp.plot.png")
-
-
-```
-
