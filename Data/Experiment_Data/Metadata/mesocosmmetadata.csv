@@ -2,10 +2,10 @@ Tank_ID,TempTreatment,Heater_watts,Top_Bottom,StepAC,StepDoor
 TNK_2,14,200,Top,7,2
 TNK_3,16,200,Bottom,8,1
 TNK_4,18,200,Bottom,7,2
-TNK_5,20,300,Top,5,4
+TNK_5,20,400,Top,5,4
 TNK_6,22,400,Top,4,5
 TNK_7,24,600,Bottom,5,4
-TNK_8,26,600,Bottom,4,5
+TNK_8,26,700,Bottom,4,5
 TNK_9,12,200,Top,2,7
 TNK_10,14,200,Top,1,8
 TNK_11,16,200,Bottom,2,7
