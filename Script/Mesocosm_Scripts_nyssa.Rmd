@@ -47,8 +47,8 @@ metadata <- read_csv(here("Data", "Experiment_Data", "Metadata", "mesocosmmetada
 temp.clean <- temp.data %>% 
   mutate(Tide = ifelse(Time > hms("12:00:00") & Time < hms("18:00:00") | Time > hms("00:00:00") & Time < hms("06:00:00"), "Low","High")) %>% #tide column
   #update dates here for what subset you want to view
-  filter(Date >= "2022-07-21",
-         Date <= "2022-07-22") %>% 
+  filter(Date >= "2022-07-22",
+         Date <= "2022-07-23") %>% 
     group_by(Tank_ID) %>% 
   na.omit() %>% 
   left_join(metadata)
@@ -160,3 +160,22 @@ ggsave(plot = mesocosm.temp.plot, width = 10, height = 10, dpi = 300, filename =
 
 
 ```
+```{r}
+mesocosm.temp.plot <- ggplot(water.temperature, aes(y=Temp, group=TempTreatment))+
+  geom_boxplot()+
+  geom_hline(aes(yintercept = TempTreatment))+
+  scale_color_discrete(name="Tank")+
+  theme_bw()+
+  theme(text=element_text(family="Helvetica", size = 5, color = 'black'),
+        legend.title = element_text(size=10))+
+    scale_y_continuous(breaks = c(12,14,16,18,20,22,24,26))+
+  labs(title="Mesocosm Temperature Range")+
+  xlab("Date")+
+  ylab("Temperature (°C)")
+
+mesocosm.temp.plot
+
+ggsave(plot = mesocosm.temp.plot, width = 10, height = 10, dpi = 300, filename = "mesocosm.temp.plot.png")
+
+```
+
