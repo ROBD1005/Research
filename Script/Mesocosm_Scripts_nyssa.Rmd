@@ -155,7 +155,7 @@ mesocosm.temp.plot <- ggplot(temp.clean, aes(y=Temp, x=Date))+
 
 mesocosm.temp.plot
 
-ggsave(plot = mesocosm.temp.plot, width = 10, height = 10, dpi = 300, filename = "mesocosm.temp.plot.png")
+ggsave(plot = mesocosm.temp.plot, width = 10, height = 10, dpi = 300, filename = "mesocosm.temp.plotJuly25.png")
 
 
 
