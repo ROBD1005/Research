@@ -47,8 +47,8 @@ metadata <- read_csv(here("Data", "Experiment_Data", "Metadata", "mesocosmmetada
 temp.clean <- temp.data %>% 
   mutate(Tide = ifelse(Time > hms("12:00:00") & Time < hms("18:00:00") | Time > hms("00:00:00") & Time < hms("06:00:00"), "Low","High")) %>% #tide column
   #update dates here for what subset you want to view
-  filter(Date >= "2022-07-21",
-         Date <= "2022-07-22") %>% 
+  filter(Date >= "2022-07-23",
+         Date <= "2022-07-25") %>% 
     group_by(Tank_ID) %>% 
   na.omit() %>% 
   left_join(metadata)
