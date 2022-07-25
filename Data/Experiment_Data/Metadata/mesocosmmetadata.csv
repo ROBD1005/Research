@@ -5,9 +5,9 @@ TNK_4,18,Low,200,Bottom,7,2
 TNK_5,20,Low,400,Top,5,4
 TNK_6,22,Low,400,Top,4,5
 TNK_7,24,Low,600,Bottom,5,4
-TNK_8,26,Low,700,Bottom,4,5
-TNK_9,12,Low,200,Top,2,7
-TNK_10,14,Ambient,200,Top,1,8
+TNK_8,26,Low,800,Bottom,4,5
+TNK_9,14,Low,200,Top,2,7
+TNK_10,12,Ambient,200,Top,1,8
 TNK_11,16,Ambient,200,Bottom,2,7
 TNK_12,18,Ambient,200,Bottom,1,8
 TNK_13,20,Ambient,300,Top,2,7
