@@ -47,8 +47,13 @@ metadata <- read_csv(here("Data", "Experiment_Data", "Metadata", "mesocosmmetada
 temp.clean <- temp.data %>% 
   mutate(Tide = ifelse(Time > hms("12:00:00") & Time < hms("18:00:00") | Time > hms("00:00:00") & Time < hms("06:00:00"), "Low","High")) %>% #tide column
   #update dates here for what subset you want to view
+<<<<<<< HEAD
   filter(Date >= "2022-07-27",
          Date <= "2022-07-28") %>% 
+=======
+  filter(Date >= "2022-07-24",
+         Date <= "2022-07-26") %>% 
+>>>>>>> 3c9821bea97f6391d471c1fd5f68c0f24c2cebdb
     group_by(Tank_ID) %>% 
   na.omit() %>% 
   left_join(metadata)
@@ -155,7 +160,7 @@ mesocosm.temp.plot <- ggplot(temp.clean, aes(y=Temp, x=Date))+
 
 mesocosm.temp.plot
 
-ggsave(plot = mesocosm.temp.plot, width = 10, height = 10, dpi = 300, filename = "mesocosm.temp.plot.png")
+ggsave(plot = mesocosm.temp.plot, width = 10, height = 10, dpi = 300, filename = "mesocosm.temp.plotJuly25.png")
 
 
 
