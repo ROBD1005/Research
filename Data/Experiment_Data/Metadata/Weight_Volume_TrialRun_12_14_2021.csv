@@ -1,0 +1,10 @@
+ID,weight_g,Volume_mL_Start,Volume_mL_Final,Volume_Displaced
+hour_tegula_1,2.9092,51,52,103
+hour_tegula_2,1.8900,50,51,101
+hour_tegula_3,1.6064,50,51.5,101.5
+hour_shell,4.4723,49,53,102
+hour_control,NA,NA,NA,NA
+twohour_tegula_1,5.2925,48.5,51.5,100
+twohour_tegula_2,2.1599,48,49,97
+twohour_shell,4.294,48,50.5,98.5
+twohour_control,NA,NA,NA,NA
