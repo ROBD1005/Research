@@ -10,7 +10,7 @@ TNK_9,12,Low,200,Top,2,7
 TNK_10,14,Ambient,200,Top,1,8
 TNK_11,16,Ambient,200,Bottom,2,7
 TNK_12,18,Ambient,200,Bottom,1,8
-TNK_13,20,Ambient,300,Top,2,7
+TNK_13,20,Ambient,400,Top,2,7
 TNK_14,22,Ambient,400,Top,3,6
 TNK_15,24,Ambient,600,Bottom,2,7
 TNK_16,26,Ambient,700,Bottom,3,6
