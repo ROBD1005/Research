@@ -7,8 +7,8 @@ library(seacarb)
 library(broom)
 
 ## bring in pH calibration files and raw data files
-pHcalib<-read_csv("Data/Experiment_Data/pH_Tanks/TrispHcalibration.csv")
-pHData<-read_csv("Data/Experiment_Data/pH_Tanks/pH_mesocosm.csv")
+pHcalib<-read_csv("Data/Experiment_Data/Mesocosm_Tank_pH/TrispHcalibration.csv")
+pHData<-read_csv("Data/Experiment_Data/Mesocosm_Tank_pH/pH_mesocosm.csv")
 
 #mVTris is milivolts of the tris calibration
 #TTris is temperature of the tris calibration 
@@ -56,7 +56,7 @@ pHSlope<-pHcalib %>%
 View(pHSlope)
 
 ## write the data
-write_csv(pHSlope, paste0('Data/Experiment_Data/pH_Tanks/pHTotal.csv'))
+write_csv(pHSlope, paste0('Data/Experiment_Data/Mesocosm_Tank_pH/pHTotal.csv'))
 
 
 #consider creating another datasheet that has the range, ave, standard error for each of the pH groups
