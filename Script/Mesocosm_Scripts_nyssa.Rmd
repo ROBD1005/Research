@@ -46,8 +46,8 @@ metadata <- read_csv(here("Data", "Experiment_Data", "Metadata", "mesocosmmetada
 #cleaning and filtering data
 temp.clean <- temp.data %>% 
   mutate(Tide = ifelse(Time > hms("12:00:00") & Time < hms("18:00:00") | Time > hms("00:00:00") & Time < hms("06:00:00"), "Low","High")) %>% #tide column
-  filter(Date >= "2022-07-29",
-         Date <= "2022-08-01") %>% 
+  filter(Date >= "2022-08-11",
+         Date <= "2022-08-12") %>% 
     group_by(Tank_ID) %>% 
   na.omit() %>% 
   left_join(metadata)
@@ -90,9 +90,7 @@ air.temperature.summary <- air.temperature %>%
   xlab("Step from AC")+
   ylab("Temperature Difference (°C)")
 
- air.temperature.difference.plot 
- 
- ggsave(plot =  air.temperature.difference.plot, width = 15, height = 10, dpi = 500, filename = "air.temp.difference.plot.png")
+
 
 ```
 
@@ -130,9 +128,8 @@ water.temperature.difference.plot <- water.temperature %>%
   xlab("Tank ID")+
   ylab("Temperature Difference (°C)")
 
- water.temperature.difference.plot 
 
- ggsave(plot = water.temperature.difference.plot, width = 15, height = 10, dpi = 500, filename = "water.temperature.difference.plot.png")
+
 ```
 
 #Facetwrap Tank Plots (High versus Low Tide)
@@ -145,16 +142,15 @@ mesocosm.temp.plot <- ggplot(temp.clean, aes(y=Temp, x=Date))+
   facet_wrap(~Tank_ID)+
   scale_color_discrete(name="Tank")+
   theme_bw()+
-  theme(text=element_text(family="Helvetica", size = 5, color = 'black'),
+  theme(text=element_text(family="Helvetica", size = 7, color = 'black'),
         legend.title = element_text(size=10))+
-    scale_y_continuous(breaks = c(12,14,16,18,20,22,24,26))+
+    scale_y_continuous(breaks = c(12,14,16,18,20,22,24,26,28,32))+
   labs(title="Mesocosm Temperature Range")+
   xlab("Date")+
   ylab("Temperature (°C)")
 
 mesocosm.temp.plot
 
-ggsave(plot = mesocosm.temp.plot, width = 10, height = 10, dpi = 300, filename = "mesocosm.temp.plotJuly25.png")
 
 
 
@@ -172,7 +168,6 @@ mesocosm.temp.plot <- ggplot(water.temperature, aes(y=Temp, X=factor(TempTreatme
 
 mesocosm.temp.plot
 
-ggsave(plot = mesocosm.temp.plot, width = 10, height = 10, dpi = 300, filename = "mesocosm.temp.plot.png")
 
 ```
 

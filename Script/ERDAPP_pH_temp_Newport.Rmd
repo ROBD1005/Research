@@ -45,9 +45,12 @@ sccoos.summary.hourly <- sccoos.newport.data %>%
 sccoos.summary.daily <- sccoos.newport.data %>% 
   group_by(date)%>% # group date
   summarise(SST.mean = mean(temperature, na.rm=TRUE), #calculate mean
-            pH.mean = mean(pH, na.rm=TRUE))
+            pH.mean = mean(pH, na.rm=TRUE)) 
 
 ```
+
+
+
 ```{r}
 
 # make the plot and add labels
