@@ -1,0 +1,125 @@
+﻿Sample_ID,Sample_type,Filter,Volume_ml,Fiber,Microparticles,Total,Site,Latitude,Longitude,Depth,Pelagic,Benthic,distance_shore_km,,NMS
+NA123-014,Niskin,1.2,50,15,28,43,Santa Lucia Palm,34.8835215,-121.7466085,1312.285469,Bathypelagic,N/A,97.65,N/A,Monterey Bay
+NA122-008,Drift Algae,1.2,1500,47,7,54,Pioneer Canyon North,37.330084,-123.07571,1057.69676,N/A,Bathyal,,,Not a NMS
+NA122-059,Niskin,1.2,50,10,4,14,South Ancapa Slope,33.9935735,-119.345129,200.1900262,Epipelagic,N/A,20.52,2.5,Channel Islands
+NA122-060,Niskin,1.2,50,7,14,21,South Ancapa Slope,33.99323987,-119.3457959,49.62486787,Epipelagic,N/A,20.69,2.48,Channel Islands
+NA122-056,Niskin,1.2,50,14,4,18,South Ancapa Slope,33.9899525,-119.3472555,385.2788747,Mesopelagic,N/A,21.11,2.83,Channel Islands
+NA122-050,Niskin,1.2,50,10,10,20,South Ancapa Slope,33.98551313,-119.3492875,438.9977481,Mesopelagic,N/A,21.95,3.08,Channel Islands
+NA122-082,Niskin,1.2,50,7,0,7,Poti Penninsula,33.926549,-119.4188485,395.0283431,Mesopelagic,N/A,30.47,8.34,Channel Islands
+NA123-130,Niskin,0.4,1100,54,28,82,Footprint Reef,33.959886,-119.4734805,53.89254924,Epipelagic,N/A,30.77,6.23,Not a NMS
+NA123-061,Niskin,1.2,50,6,1,7,Poti Penninsula,33.9067624,-119.4098234,662.0751778,Mesopelagic,N/A,31.66,10.42,Channel Islands
+NA123-078,Niskin,0.4,1100,21,26,47,Offshore San Miguel,34.8714145,-121.029211,198.5196092,Epipelagic,N/A,32.56,N/A,Channel Islands
+NA123-079,Niskin,0.4,1100,25,6,31,Offshore San Miguel,34.8720935,-121.0298315,49.92012062,Epipelagic,N/A,33.03,N/A,Channel Islands
+NA123-077,Niskin,0.4,1100,29,29,58,Offshore San Miguel,34.881699,-121.0384375,334.9524134,Mesopelagic,N/A,33.3,N/A,Channel Islands
+NA123-148,Niskin,0.4,1100,16,13,29,Rock Bridge,33.9427005,-119.489113,49.71080615,Epipelagic,N/A,33.77,8.31,Not a NMS
+NA123-147,Niskin,0.4,1100,14,8,22,Rock Bridge,33.94207713,-119.4889445,527.2645001,Mesopelagic,N/A,33.78,8.26,Not a NMS
+NA122-048-01,Urchin,1.2,1000,8,0,8,South Ancapa Slope,33.98551715,-119.349292,438.9545244,N/A,Bathyal,,,Not a NMS
+NA122-048-01,Urchin,10,1000,0,0,0,South Ancapa Slope,33.98551715,-119.349292,438.9545244,N/A,Bathyal,,,Not a NMS
+NA122-048-01,Urchin,20,1000,1,0,1,South Ancapa Slope,33.98551715,-119.349292,97.41821301,N/A,Sublitoral,,,Not a NMS
+NA122-048-02,Urchin,1.2,1000,2,0,2,South Ancapa Slope,33.98551715,-119.349292,438.9545244,N/A,Bathyal,,,Not a NMS
+NA122-048-02,Urchin,20,1000,0,0,0,South Ancapa Slope,33.98551715,-119.349292,438.9545244,N/A,Bathyal,,,Not a NMS
+NA122-049,Push Core,20,500,10,1,11,South Ancapa Slope,33.9855165,-119.3492925,438.9980407,N/A,Bathyal,,,Not a NMS
+NA122-049-01-500-sieve,Push Core,1.2,500,0,0,0,South Ancapa Slope,33.9855165,-119.3492925,438.9980407,N/A,Bathyal,,,Not a NMS
+NA122-049-01-125-sieve,Push Core,20,500,2,0,2,South Ancapa Slope,33.9855165,-119.3492925,438.9980407,N/A,Bathyal,,,Not a NMS
+NA122-049-250-sieve,Push Core,20,500,0,0,0,South Ancapa Slope,33.9855165,-119.3492925,438.9980407,N/A,Bathyal,,,Not a NMS
+NA122-049-250-sieve,Push Core,1.2,100,4,0,4,South Ancapa Slope,33.9855165,-119.3492925,438.9980407,N/A,Bathyal,,,Not a NMS
+NA122-049-500-sieve,Push Core,20,50,3,0,3,South Ancapa Slope,33.9855165,-119.3492925,438.9980407,N/A,Bathyal,,,Not a NMS
+NA122-049-125-sieve,Push Core,1.2,50,0,0,0,South Ancapa Slope,33.9855165,-119.3492925,438.9980407,N/A,Bathyal,,,Not a NMS
+NA123-146,Niskin,0.4,1100,18,5,23,Rock Bridge,33.94215167,-119.4887685,568.2043337,Mesopelagic,N/A,33.81,8.75,Not a NMS
+NA123-159,Niskin,0.4,1100,13,3,16,North Santa Cruz Island,34.063766,-119.6052175,50.20824342,Epipelagic,N/A,33.97,2.32,Not a NMS
+NA123-152,Niskin,0.4,1100,12,11,23,North Santa Cruz Island,34.076991,-119.6011585,90.619954,Epipelagic,N/A,34.89,3.16,Not a NMS
+NA123-133,Niskin,0.4,1100,67,7,74,Rock Bridge,33.93316547,-119.509326,808.8752748,Mesopelagic,N/A,35.63,8.25,Not a NMS
+NA122-061-01,Sea Pen,1.2,1000,10,9,19,Poti Penninsula,33.9067624,-119.4098234,662.0751778,N/A,Bathyal,,,Not a NMS
+NA122-061-01,Sea Pen,20,1000,12,8,20,Poti Penninsula,33.9067624,-119.4098234,662.0751778,N/A,Bathyal,,,Not a NMS
+NA122-061-02,Sea Pen,1.2,1000,9,7,16,Poti Penninsula,33.9067624,-119.4098234,662.0751778,N/A,Bathyal,,,Not a NMS
+NA122-061-02,Sea Pen,20,1000,15,5,20,Poti Penninsula,33.9067624,-119.4098234,662.0751778,N/A,Bathyal,,,Not a NMS
+NA122-061-05,Sea Pen,1.2,1000,12,10,22,Poti Penninsula,33.9067624,-119.4098234,662.0751778,N/A,Bathyal,,,Not a NMS
+NA122-061-05,Sea Pen,20,1000,7,2,9,Poti Penninsula,33.9067624,-119.4098234,662.0751778,N/A,Bathyal,,,Not a NMS
+NA122-066-01,Urchin,1.2,1000,8,1,9,Poti Penninsula,33.916922,-119.41289,483.4108533,N/A,Bathyal,,,Not a NMS
+NA122-066-01,Urchin,10,1000,0,0,0,Poti Penninsula,33.916922,-119.41289,483.4108533,N/A,Bathyal,,,Not a NMS
+NA122-066-01,Urchin,20,1000,0,0,0,Poti Penninsula,33.916922,-119.41289,483.4108533,N/A,Bathyal,,,Not a NMS
+NA122-066-02,Urchin,1.2,1000,12,2,14,Poti Penninsula,33.916922,-119.41289,483.4108533,N/A,Bathyal,,,Not a NMS
+NA122-066-02,Urchin,20,1000,0,0,0,Poti Penninsula,33.916922,-119.41289,483.4108533,N/A,Bathyal,,,Not a NMS
+NA123-098,Niskin,0.4,1100,35,23,58,West San Miguel Shelf,34.0701195,-120.5616195,51.19453097,Epipelagic,N/A,42.42,11.22,Channel Islands
+NA123-009,Drift Algae,1.2,1500,7,6,13,Santa Lucia Palm,34.88649226,-121.7543744,1455.445382,N/A,Bathyal,,,Not a NMS
+NA123-097,Niskin,0.4,1100,47,13,60,West San Miguel Shelf,34.06993849,-120.5613347,70.11753306,Epipelagic,N/A,42.44,11.09,Channel Islands
+NA123-090,Niskin,0.4,1100,34,10,44,West San Miguel Shelf,34.06517,-120.5580909,127.5494574,Epipelagic,N/A,42.75,10.49,Channel Islands
+NA123-085,Niskin,0.4,1100,41,14,55,West San Miguel Shelf,34.060488,-120.560013,140.1770675,Epipelagic,N/A,43.41,10.65,Channel Islands
+NA123-101,Niskin,0.4,1100,19,17,36,East Santa Cruz Canyon Wall,33.8933575,-119.706765,1117.479579,Bathypelagic,N/A,52.7,6.59,Channel Islands
+NA122-028,Niskin,1.2,50,7,2,9,Pioneer Canyon South,37.21683452,-123.0415042,100.6744944,Epipelagic,N/A,55.4,N/A,Monterey Bay
+NA122-021,Niskin,1.2,2000,37,8,45,Pioneer Canyon South,37.21675262,-123.0492689,819.50318,Mesopelagic,N/A,55.89,N/A,Monterey Bay
+NA122-005,Niskin,1.2,50,25,35,60,Pioneer Canyon North,39.3325546,-121.09146,1106.090505,Bathypelagic,N/A,56.8,N/A,Not a NMS
+NA122-011,Niskin,1.2,50,2,57,59,Pioneer Canyon North,39.33410971,-121.0701256,1145.95927,Bathypelagic,N/A,57.32,N/A,Not a NMS
+NA123-057,Drift Algae,1.2,1500,2,0,2,Santa Lucia Escarpment ,34.7210058,-121.8251327,3802.584391,N/A,Abyssal,,,Not a NMS
+NA122-012,Niskin,1.2,50,6,30,36,Pioneer Canyon North,38.3339915,-122.065069,1044.773529,Bathypelagic,N/A,57.79,N/A,Not a NMS
+NA123-062-01,Sea Pig,1.2,800,2,0,2,Santa Lucia Escarpment ,34.73109726,-121.8220389,3491.447342,N/A,Abyssal,,,Not a NMS
+NA123-062-01,Sea Pig,10,800,0,0,0,Santa Lucia Escarpment ,34.73109726,-121.8220389,3491.447342,N/A,Abyssal,,,Not a NMS
+NA123-062-01,Sea Pig,20,800,3,1,4,Santa Lucia Escarpment ,34.73109726,-121.8220389,3491.447342,N/A,Abyssal,,,Not a NMS
+NA123-062-02,Sea Pig,1.2,800,13,1,14,Santa Lucia Escarpment ,34.73109726,-121.8220389,3491.447342,N/A,Abyssal,,,Not a NMS
+NA123-062-02,Sea Pig,10,800,2,0,2,Santa Lucia Escarpment ,34.73109726,-121.8220389,3491.447342,N/A,Abyssal,,,Not a NMS
+NA123-062-02,Sea Pig,20,800,0,0,0,Santa Lucia Escarpment ,34.73109726,-121.8220389,3491.447342,N/A,Abyssal,,,Not a NMS
+NA123-063,Push Core,1.2,500,0,0,0,Santa Lucia Escarpment ,34.730837,-121.8220085,3491.489895,N/A,Abyssal,,,Not a NMS
+NA123-063,Push Core,10,500,1,0,1,Santa Lucia Escarpment ,34.730837,-121.8220085,3491.489895,N/A,Abyssal,,,Not a NMS
+NA123-063,Push Core,20,500,0,0,0,Santa Lucia Escarpment ,34.730837,-121.8220085,3491.489895,N/A,Abyssal,,,Not a NMS
+NA122-013,Niskin,1.2,1000,188,75,263,Pioneer Canyon North,39.33348093,-121.064847,462.533242,Mesopelagic,N/A,57.79,N/A,Not a NMS
+NA122-014,Niskin,1.2,3500,27,28,55,Pioneer Canyon North,38.3336125,-122.0651515,250.8531247,Mesopelagic,N/A,57.79,N/A,Not a NMS
+NA122-017,Niskin,1.2,50,32,10,42,Pioneer Canyon South,37.20880914,-123.0712725,986.4150499,Mesopelagic,N/A,57.79,N/A,Monterey Bay
+NA123-021,Niskin,1.2,5000,36,1,37,Santa Lucia Palm,34.87780926,-121.738058,49.90585521,Epipelagic,N/A,87.19,N/A,Monterey Bay
+NA123-076-03,Urchin,0.4,1000,2,1,3,Offshore San Miguel,34.88169555,-121.0384334,334.9410573,N/A,Bathyal,,,Not a NMS
+NA123-019,Niskin,1.2,5000,78,2,80,Santa Lucia Palm,34.87726076,-121.7367808,695.4557591,Mesopelagic,N/A,87.26,N/A,Monterey Bay
+NA123-072,Niskin,0.4,1200,41,33,74,Santa Lucia Escarpment ,34.716124,-121.7814735,2900.920739,Abysalpelagic,N/A,100.93,N/A,Monterey Bay
+NA123-073,Niskin,0.4,600,23,16,39,Santa Lucia Escarpment ,34.71628772,-121.7810222,698.3944014,Mesopelagic,N/A,100.93,N/A,Monterey Bay
+NA123-081-01,Urchin,1.2,700,0,1,1,West San Miguel Shelf,34.06048027,-120.5600145,140.435083,N/A,Sublitoral,,,Not a NMS
+NA123-081-01,Urchin,10,700,2,1,3,West San Miguel Shelf,34.06048027,-120.5600145,140.435083,N/A,Sublitoral,,,Not a NMS
+NA123-081-01,Urchin,20,700,1,0,1,West San Miguel Shelf,34.06048027,-120.5600145,140.435083,N/A,Sublitoral,,,Not a NMS
+NA123-081-02,Urchin,1.2,700,1,0,1,West San Miguel Shelf,34.06048027,-120.5600145,140.435083,N/A,Sublitoral,,,Not a NMS
+NA123-081-02,Urchin,20,700,3,1,4,West San Miguel Shelf,34.06048027,-120.5600145,140.435083,N/A,Sublitoral,,,Not a NMS
+NA123-068,Niskin,0.4,1000,21,4,25,Santa Lucia Escarpment ,34.73278711,-121.8075465,3058.086155,Abysalpelagic,N/A,100.98,N/A,Monterey Bay
+NA123-065,Niskin,0.4,1100,39,101,140,Santa Lucia Escarpment ,34.73090077,-121.8221322,3490.8684,Abysalpelagic,N/A,102.46,N/A,Monterey Bay
+NA122-043,Niskin,1.2,50,2,6,8,Octocone/Whalle-Fall,35.58670857,-122.6253375,996.9943044,Mesopelagic,N/A,102.81,N/A,Monterey Bay
+NA122-040,Niskin,1.2,2100,81,2,83,Octocone/Whalle-Fall,35.5821075,-122.6286442,3240.154026,Abysalpelagic,N/A,103.02,N/A,Monterey Bay
+NA122-041,Niskin,1.2,50,9,4,13,Octocone/Whalle-Fall,35.5841871,-122.6271904,3240.154026,Abysalpelagic,N/A,103.37,N/A,Monterey Bay
+NA123-102,Drift Algae,1.2,1500,3,2,5,East Santa Cruz Canyon Wall,33.89432885,-119.7069902,1100.702048,N/A,Bathyal,,,Not a NMS
+NA123-102,Slurp Water,1.2,1100,14,3,17,East Santa Cruz Canyon Wall,33.89432885,-119.7069902,1100.702048,N/A,Bathyal,,,Not a NMS
+NA123-114-01,Urchin,1.2,700,5,2,7,Footprint Reef,33.94818703,-119.4787052,519.4347569,N/A,Bathyal,,,Not a NMS
+NA123-114-01,Urchin,10,700,0,0,0,Footprint Reef,33.94818703,-119.4787052,519.4347569,N/A,Bathyal,,,Not a NMS
+NA123-114-01,Urchin,20,700,0,0,0,Footprint Reef,33.94818703,-119.4787052,519.4347569,N/A,Bathyal,,,Not a NMS
+NA123-114-02,Urchin,1.2,700,4,0,4,Footprint Reef,33.94818703,-119.4787052,519.4347569,N/A,Bathyal,,,Not a NMS
+NA123-114-02,Urchin,10,700,1,0,1,Footprint Reef,33.94818703,-119.4787052,519.4347569,N/A,Bathyal,,,Not a NMS
+NA123-114-02,Urchin,20,700,0,0,0,Footprint Reef,33.94818703,-119.4787052,519.4347569,N/A,Bathyal,,,Not a NMS
+NA123-114-03,Urchin,1.2,700,4,0,4,Footprint Reef,33.94818703,-119.4787052,519.4347569,N/A,Bathyal,,,Not a NMS
+NA123-114-04,Urchin,1.2,700,4,2,6,Footprint Reef,33.94818703,-119.4787052,519.4347569,N/A,Bathyal,,,Not a NMS
+NA123-114-04,Urchin,10,700,0,0,0,Footprint Reef,33.94818703,-119.4787052,519.4347569,N/A,Bathyal,,,Not a NMS
+NA123-114-04,Urchin,20,700,0,0,0,Footprint Reef,33.94818703,-119.4787052,519.4347569,N/A,Bathyal,,,Not a NMS
+NA123-114-05,Urchin,1.2,700,5,2,7,Footprint Reef,33.94818703,-119.4787052,519.4347569,N/A,Bathyal,,,Not a NMS
+NA123-114-05,Urchin,10,700,2,0,2,Footprint Reef,33.94818703,-119.4787052,519.4347569,N/A,Bathyal,,,Not a NMS
+NA123-114-05,Urchin,20,700,6,2,8,Footprint Reef,33.94818703,-119.4787052,519.4347569,N/A,Bathyal,,,Not a NMS
+NA123-115-sieve-pan,Push Core,1.2,700,3,0,3,Footprint Reef,33.94818762,-119.4787154,519.396159,N/A,Bathyal,,,Not a NMS
+NA123-115-500-sieve,Push Core,10,175,0,0,0,Footprint Reef,33.94818762,-119.4787154,519.396159,N/A,Bathyal,,,Not a NMS
+NA123-115-125-sieve,Push Core,1.2,50,3,0,3,Footprint Reef,33.94818762,-119.4787154,519.396159,N/A,Bathyal,,,Not a NMS
+NA123-115-250-sieve,Push Core,1.2,50,0,0,0,Footprint Reef,33.94818762,-119.4787154,519.396159,N/A,Bathyal,,,Not a NMS
+NA122-042,Niskin,1.2,50,8,13,21,Octocone/Whalle-Fall,35.58571885,-122.6255605,1995.885313,Bathypelagic,N/A,103.41,N/A,Monterey Bay
+NA123-132,Drift Algae,1.2,1500,10,4,14,Rock Bridge,33.93316377,-119.5093258,808.9015674,N/A,Bathyal,,,Not a NMS
+NA123-132,Slurp Water,0.4,1100,24,1,25,Rock Bridge,33.93316377,-119.5093258,808.9015674,N/A,Bathyal,,,Not a NMS
+NA122-044,Niskin,1.2,4600,4,3,7,Octocone/Whalle-Fall,35.58746011,-122.6245546,97.41821301,Epipelagic,N/A,107.82,N/A,Monterey Bay
+NA123-035,Niskin,1.2,5100,246,79,325,Southwest Davidson Seamount,35.54326643,-122.818778,47.97768967,Epipelagic,N/A,117.58,N/A,Monterey Bay
+NA123-033,Niskin,1.2,3900,221,143,364,Southwest Davidson Seamount,35.54407133,-122.8199535,995.3470169,Mesopelagic,N/A,117.99,N/A,Monterey Bay
+NA123-034,Niskin,1.2,4100,496,150,646,Southwest Davidson Seamount,35.54337435,-122.8194579,194.8198814,Epipelagic,N/A,119.25,N/A,Monterey Bay
+NA123-151,Drift Algae,1.2,1500,9,6,15,North Santa Cruz Island,34.07699,-119.60116,90.47237711,N/A,Sublitoral,,,Not a NMS
+NA123-151,Slurp Water,0.4,600,39,9,48,North Santa Cruz Island,34.07699,-119.6011585,90.47237711,N/A,Sublitoral,,,Not a NMS
+NA123-028,Niskin,1.2,4100,68,54,122,Southwest Davidson Seamount,35.53486043,-122.8257308,3170.360188,Abysalpelagic,N/A,120.18,N/A,Monterey Bay
+NA123-155,Drift Algae,1.2,1000,10,1,11,North Santa Cruz Island,"34.074303	",-119.600623,90.55582079,N/A,Sublitoral,,,Not a NMS
+NA123-155,Slurp Water,0.4,1100,25,6,31,North Santa Cruz Island,"34.074303	-119.600626",,90.55582079,N/A,Sublitoral,,,Not a NMS
+NA123-155-01,Urchin,1.2,700,3,0,3,North Santa Cruz Island,"34.074303	-119.600632",,90.55582079,N/A,Sublitoral,,,Not a NMS
+NA123-155-01,Urchin,10,700,0,0,0,North Santa Cruz Island,"34.074303	-119.600630",,90.55582079,N/A,Sublitoral,,,Not a NMS
+NA123-155-01,Urchin,20,700,0,0,0,North Santa Cruz Island,"34.074303	-119.600631",,90.55582079,N/A,Sublitoral,,,Not a NMS
+NA123-155-02,Urchin,1.2,700,3,0,3,North Santa Cruz Island,"34.074303	-119.600638",,90.55582079,N/A,Sublitoral,,,Not a NMS
+NA123-155-02,Urchin,10,700,0,0,0,North Santa Cruz Island,"34.074303	-119.600637",,90.55582079,N/A,Sublitoral,,,Not a NMS
+NA123-155-02,Urchin,20,700,0,0,0,North Santa Cruz Island,"34.074303	-119.600636",,90.55582079,N/A,Sublitoral,,,Not a NMS
+NA123-155-03,Urchin,1.2,700,4,1,5,North Santa Cruz Island,"34.074303	-119.600629",,90.55582079,N/A,Sublitoral,,,Not a NMS
+NA123-155-03,Urchin,10,700,0,0,0,North Santa Cruz Island,"34.074303	-119.600628",,90.55582079,N/A,Sublitoral,,,Not a NMS
+NA123-155-03,Urchin,20,700,0,0,0,North Santa Cruz Island,"34.074303	-119.600627",,90.55582079,N/A,Sublitoral,,,Not a NMS
+NA123-155-04,Urchin,1.2,700,1,0,1,North Santa Cruz Island,"34.074303	-119.600635",,90.55582079,N/A,Sublitoral,,,Not a NMS
+NA123-155-04,Urchin,10,700,0,0,0,North Santa Cruz Island,"34.074303	-119.600634",,90.55582079,N/A,Sublitoral,,,Not a NMS
+NA123-155-04,Urchin,20,700,0,0,0,North Santa Cruz Island,"34.074303	-119.600633",,90.55582079,N/A,Sublitoral,,,Not a NMS
+NA123-023,Niskin,1.2,3800,280,186,466,Southwest Davidson Seamount,35.533487,-122.839857,3081.007728,Abysalpelagic,N/A,121.59,N/A,Monterey Bay
