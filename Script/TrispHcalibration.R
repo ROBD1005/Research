@@ -15,12 +15,14 @@ pHData<-read_csv("Data/Experiment_Data/Mesocosm_Tank_pH/pH_mesocosm.csv")
 #there needs to be at least three points of Tris values at different temperature
 
 #fit a linear model between temperature and mV
-mVTris_t<-lm(mVTris~TTris, data =pHcalib)
+todaypHcalib<-pHcalib %>%
+  filter(date=='20220816')
+mVTris_t<-lm(mVTris~TTris, data =todaypHcalib)
 print(summary(mVTris_t))
 #make sure they are significant and R^2 is around 0.99
 
 #plot temperature vs millivolt -- make sure it looks like a straight line
-pHTrisplot<-ggplot(data =pHcalib, aes(x=TTris, y=mVTris))+
+pHTrisplot<-ggplot(data =todaypHcalib, aes(x=TTris, y=mVTris))+
   geom_line() +
   theme_classic()
 pHTrisplot
