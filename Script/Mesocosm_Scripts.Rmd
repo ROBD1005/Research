@@ -22,9 +22,7 @@ library(ggplot2)
 # Data Wrangling
 
 ```{r, warning=FALSE, echo=FALSE}
-
 setwd("Data")
-
 files <- list.files(here("Data/Experiment_Data/Mesocosm_Tank_Temperatures/Tanks"), pattern = ".csv", full.names = TRUE) %>% 
   sort(decreasing = TRUE) #files ordered by decreasing values
 
