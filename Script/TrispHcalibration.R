@@ -16,7 +16,7 @@ pHData<-read_csv("Data/Experiment_Data/Mesocosm_Tank_pH/pH_mesocosm.csv")
 
 #fit a linear model between temperature and mV
 todaypHcalib<-pHcalib %>%
-  filter(date=='20220901')
+  filter(date=='20220902')
 
 mVTris_t<-lm(mVTris~TTris, data =todaypHcalib)
 print(summary(mVTris_t))
