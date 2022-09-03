@@ -388,7 +388,7 @@ date,SampleID,Salinity_lab,mV,TempInSitu
 20220902,control-24-run-high,32.9,-75.6,23.744
 20220902,control-22-run-high,32.9,-81.9,22.351
 20220902,control-20-run-high,32.9,-75.1,20.858
-20220902,control-18-run-high,32.9,,
-20220902,control-16-run-high,32.9,,
-20220902,control-14-run-high,32.9,,
-20220902,control-12-run-high,32.9,,
+20220902,control-18-run-high,32.9,-75.5,16.456
+20220902,control-16-run-high,32.9,-74.8,14.608
+20220902,control-14-run-high,32.9,-73.8,13.511
+20220902,control-12-run-high,32.9,-74.4,12.713
